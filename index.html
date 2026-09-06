@@ -4,402 +4,471 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday!</title>
-  <!-- Canvas Confetti CDN -->
+  <!-- Google Fonts & Canvas Confetti -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     :root {
-      --primary-pink: #ff6b81;
-      --accent-red: #ff4757;
-      --gold-color: #ffa502;
-      --bg-gradient: linear-gradient(135deg, #a8edd8 0%, #fed6e3 100%);
-      --card-bg: rgba(255, 255, 255, 0.92);
-      --text-dark: #2f3542;
+      --primary: #ff4757;
+      --primary-light: #ff6b81;
+      --accent: #ffa502;
+      --purple: #70a1ff;
+      --dark: #0f172a;
+      --glass: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.3);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
       min-height: 100vh;
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at top left, #1e1b4b, #0f172a, #31103f);
+      color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: var(--bg-gradient);
       padding: 20px;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* Floating Music Control */
-    .music-controller {
+    /* Floating Particles Background */
+    #canvas-bg {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-    }
-
-    .music-controller button {
-      background: white;
-      border: 2px solid var(--primary-pink);
-      color: var(--primary-pink);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
-
-    .music-controller button:hover {
-      background: var(--primary-pink);
-      color: white;
-    }
-
-    /* Floating Balloons Background */
-    .balloon-container {
-      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      pointer-events: none;
       z-index: 0;
+      pointer-events: none;
     }
 
-    .balloon {
-      position: absolute;
-      bottom: -100px;
-      width: 35px;
-      height: 45px;
-      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-      animation: floatUp 8s infinite linear;
-    }
-
-    .balloon::after {
-      content: "";
-      position: absolute;
-      bottom: -12px;
-      left: 16px;
-      width: 2px;
-      height: 14px;
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-      100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
-    }
-
-    /* Card Container */
-    .card {
-      position: relative;
-      z-index: 10;
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      padding: 35px 25px;
-      border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-      text-align: center;
-      max-width: 480px;
-      width: 100%;
-    }
-
-    .avatar-wrapper img {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--primary-pink);
-      box-shadow: 0 8px 16px rgba(255, 107, 129, 0.3);
-      margin-bottom: 12px;
-    }
-
-    .title {
-      color: var(--accent-red);
-      font-size: 1.8rem;
-      margin-bottom: 6px;
-    }
-
-    .subtitle {
-      color: #747d8c;
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-    }
-
-    /* Interactive Cake Styling */
-    .cake-section {
-      margin: 25px auto;
-      cursor: pointer;
-      width: 140px;
+    /* Envelope Overlay Screen */
+    .envelope-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--dark);
+      z-index: 1000;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
+      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
     }
 
-    .candle {
-      width: 10px;
-      height: 30px;
-      background: repeating-linear-gradient(45deg, #fff, #fff 5px, var(--accent-red) 5px, var(--accent-red) 10px);
+    .envelope-screen.opened {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .envelope-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border: none;
+      padding: 18px 40px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(255, 71, 87, 0.5);
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+
+    .envelope-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 15px 40px rgba(255, 71, 87, 0.7);
+    }
+
+    /* Main Content Container */
+    .container {
       position: relative;
-      border-radius: 3px;
+      z-index: 10;
+      width: 100%;
+      max-width: 520px;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 40px 28px;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1s ease-in-out;
     }
 
-    .flame {
-      width: 12px;
-      height: 18px;
-      background: var(--gold-color);
-      border-radius: 50% 50% 20% 20%;
+    /* Avatar Glow */
+    .avatar-box {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 20px;
+    }
+
+    .avatar-box img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 25px rgba(255, 107, 129, 0.6);
+    }
+
+    .badge {
       position: absolute;
-      top: -18px;
-      left: -1px;
-      box-shadow: 0 0 10px var(--gold-color);
-      animation: flicker 0.6s infinite alternate;
+      bottom: 0;
+      right: 0;
+      background: var(--accent);
+      color: var(--dark);
+      font-size: 1.2rem;
+      padding: 6px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
-    .flame.out {
-      display: none;
+    h1.name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      background: linear-gradient(to right, #ffffff, #ff9ff3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    p.tagline {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 24px;
+    }
+
+    /* Interactive Countdown */
+    .timer-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .timer-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 14px;
+      min-width: 65px;
+    }
+
+    .timer-box .num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .timer-box .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Interactive Cake */
+    .cake-wrapper {
+      margin: 20px 0 28px;
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+    }
+
+    .cake-svg {
+      width: 100px;
+      height: 100px;
+      transition: transform 0.2s ease;
+    }
+
+    .cake-wrapper:hover .cake-svg {
+      transform: scale(1.05);
+    }
+
+    .flame-anim {
+      transform-origin: center bottom;
+      animation: flicker 0.8s infinite alternate ease-in-out;
     }
 
     @keyframes flicker {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.15); }
+      0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+      100% { transform: scale(1.2) rotate(2deg); opacity: 1; }
     }
 
-    .cake-layer {
-      width: 100%;
-      border-radius: 8px;
-    }
-
-    .cake-layer.top {
-      height: 25px;
-      background: #ff788e;
-      border-bottom: 3px solid #fff;
-    }
-
-    .cake-layer.bottom {
-      height: 35px;
-      background: #ff4757;
-      width: 120%;
-    }
-
-    .cake-hint {
-      font-size: 0.75rem;
-      color: #888;
-      margin-top: 8px;
-    }
-
-    /* Message & Photo Grid */
-    .message-box {
-      background: #f1f2f6;
-      padding: 16px;
-      border-radius: 12px;
-      font-style: italic;
-      color: var(--text-dark);
+    /* Message Box */
+    .wishes-card {
+      background: rgba(255, 255, 255, 0.06);
+      border-left: 4px solid var(--primary);
+      padding: 18px;
+      border-radius: 0 16px 16px 0;
+      text-align: left;
       font-size: 0.95rem;
-      line-height: 1.4;
-      margin-bottom: 20px;
+      line-height: 1.6;
+      margin-bottom: 28px;
     }
 
-    .memories-grid {
+    /* Memory Gallery */
+    .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 28px;
     }
 
-    .memory-card {
-      background: white;
-      padding: 6px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    .photo-frame {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .memory-card img {
+    .photo-frame img {
       width: 100%;
-      height: 80px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 6px;
+      transition: transform 0.4s ease;
     }
 
-    .memory-card span {
-      font-size: 0.7rem;
-      font-weight: bold;
-      color: #57606f;
-      display: block;
-      margin-top: 4px;
+    .photo-frame:hover img {
+      transform: scale(1.15);
     }
 
-    /* CTA Button */
-    .cta-btn {
-      background: var(--primary-pink);
+    /* Audio Floating Control */
+    .music-pill {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      padding: 10px 18px;
+      border-radius: 30px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Surprise Trigger Button */
+    .action-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--purple));
       color: white;
       border: none;
-      padding: 12px 28px;
+      padding: 16px;
+      border-radius: 18px;
       font-size: 1rem;
-      font-weight: bold;
-      border-radius: 25px;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 6px 15px rgba(255, 107, 129, 0.4);
-      transition: all 0.2s ease;
+      box-shadow: 0 8px 25px rgba(112, 161, 255, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .cta-btn:hover {
-      background: var(--accent-red);
+    .action-btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(112, 161, 255, 0.6);
     }
 
-    .hidden-surprise {
+    .hidden-note {
       display: none;
       margin-top: 18px;
-      padding: 12px;
-      background: #ffeaa7;
-      color: #d63031;
-      border-radius: 10px;
+      padding: 14px;
+      background: rgba(255, 165, 2, 0.15);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      color: var(--accent);
       font-size: 0.9rem;
-      animation: fadeIn 0.4s ease-in-out forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Balloons Background -->
-  <div class="balloon-container" id="balloonContainer"></div>
+  <!-- Ambient Canvas Background -->
+  <canvas id="canvas-bg"></canvas>
 
-  <!-- Music Controller -->
-  <div class="music-controller">
-    <button id="musicBtn" onclick="toggleMusic()">🎵 Play Music</button>
-    <audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+  <!-- Opening Envelope Splash -->
+  <div class="envelope-screen" id="envelopeScreen">
+    <h2 style="margin-bottom: 20px; font-weight: 300; letter-spacing: 2px;">YOU HAVE A SPECIAL WISH</h2>
+    <button class="envelope-btn" onclick="openGreeting()">Tap to Open Card ✉️</button>
   </div>
 
-  <main class="card">
-    <!-- Profile Image -->
-    <div class="avatar-wrapper">
-      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop" alt="Birthday Person" />
+  <!-- Audio Controller -->
+  <div class="music-pill" onclick="toggleAudio()">
+    <span id="musicIcon">🎵</span> <span id="musicText">Play Music</span>
+    <audio id="bgAudio" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+  </div>
+
+  <!-- Main Card Container -->
+  <div class="container">
+    
+    <div class="avatar-box">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop" alt="Profile" />
+      <span class="badge">✨</span>
     </div>
 
-    <h1 class="title">Happy Birthday, Sarah! 🎂</h1>
-    <p class="subtitle">Wishing you a day filled with endless joy, magic, and sweet moments!</p>
+    <h1 class="name">Happy Birthday, Sarah!</h1>
+    <p class="tagline">Celebrating another extraordinary year of life, success & smiles.</p>
 
-    <!-- Candle & Cake -->
-    <div class="cake-section" onclick="blowCandle()">
-      <div class="candle">
-        <div class="flame" id="flame"></div>
-      </div>
-      <div class="cake-layer top"></div>
-      <div class="cake-layer bottom"></div>
-      <p class="cake-hint" id="cakeHint">Click the candle to blow it out & make a wish! 🕯️</p>
+    <!-- Celebration Timer / Counter -->
+    <div class="timer-container">
+      <div class="timer-box"><div class="num" id="days">365</div><div class="label">Days</div></div>
+      <div class="timer-box"><div class="num" id="hours">24</div><div class="label">Hours</div></div>
+      <div class="timer-box"><div class="num" id="mins">60</div><div class="label">Mins</div></div>
+      <div class="timer-box"><div class="num" id="secs">00</div><div class="label">Secs</div></div>
     </div>
 
-    <!-- Personal Wish -->
-    <div class="message-box">
-      <p>
-        "May this year bring you closer to your grandest dreams, surround you with unconditional love, 
-        and give you 365 reasons to smile. Keep shining bright!" ✨
-      </p>
+    <!-- Interactive Candle SVG -->
+    <div class="cake-wrapper" onclick="blowCandle()">
+      <svg class="cake-svg" viewBox="0 0 100 100">
+        <!-- Base Layer -->
+        <path d="M 20 70 L 80 70 L 80 85 Q 80 90 75 90 L 25 90 Q 20 90 20 85 Z" fill="#ff4757" />
+        <!-- Top Layer -->
+        <path d="M 25 50 L 75 50 L 75 70 L 25 70 Z" fill="#ff6b81" />
+        <!-- Icing -->
+        <path d="M 25 50 Q 30 58 35 50 Q 40 58 45 50 Q 50 58 55 50 Q 60 58 65 50 Q 70 58 75 50" fill="none" stroke="#ffffff" stroke-width="4" />
+        <!-- Candle -->
+        <rect x="47" y="30" width="6" height="20" fill="#ffa502" rx="2" />
+        <!-- Flame -->
+        <path id="svgFlame" class="flame-anim" d="M 50 18 Q 45 25 50 30 Q 55 25 50 18 Z" fill="#ffda79" />
+      </svg>
+      <p style="font-size: 0.75rem; color: rgba(255,255,255,0.6);" id="cakeHint">Tap the candle to make a wish! 🕯️</p>
     </div>
 
-    <!-- Memory Photos -->
-    <div class="memories-grid">
-      <div class="memory-card">
-        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=300&auto=format&fit=crop" alt="Memory 1">
-        <span>Fun Times 🎉</span>
-      </div>
-      <div class="memory-card">
-        <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=300&auto=format&fit=crop" alt="Memory 2">
-        <span>Best Smiles 😊</span>
-      </div>
-      <div class="memory-card">
-        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=300&auto=format&fit=crop" alt="Memory 3">
-        <span>Celebrations 🎁</span>
-      </div>
+    <!-- Personal Wish Statement -->
+    <div class="wishes-card">
+      "May this year bring you endless reasons to smile, sound peace of mind, and the courage to chase every single goal you've set for yourself."
     </div>
 
-    <!-- Interactive Surprise Button -->
-    <button class="cta-btn" onclick="triggerSurprise()">Click for Final Surprise! 🎉</button>
-
-    <div id="hiddenSurprise" class="hidden-surprise">
-      🎁 <strong>Special Gift Note:</strong> Check your inbox or WhatsApp for something special waiting for you! 💖
+    <!-- Memory Photo Gallery -->
+    <div class="gallery">
+      <div class="photo-frame"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=300&auto=format&fit=crop" alt="Memory" /></div>
+      <div class="photo-frame"><img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=300&auto=format&fit=crop" alt="Memory" /></div>
+      <div class="photo-frame"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=300&auto=format&fit=crop" alt="Memory" /></div>
     </div>
-  </main>
+
+    <!-- Main Surprise Action -->
+    <button class="action-btn" onclick="launchSurprise()">Unlock Surprise Gift 🎉</button>
+
+    <div class="hidden-note" id="surpriseNote">
+      🎁 <strong>Surprise Unlocked:</strong> Check your mail / messages for a special gift card! 💖
+    </div>
+
+  </div>
 
   <script>
-    // Generate Floating Balloons
-    function createBalloons() {
-      const container = document.getElementById('balloonContainer');
-      const colors = ['#ff6b81', '#70a1ff', '#7bed9f', '#eccc68', '#ff7f50'];
-
-      for (let i = 0; i < 15; i++) {
-        const balloon = document.createElement('div');
-        balloon.className = 'balloon';
-        balloon.style.left = `${Math.random() * 100}%`;
-        balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        balloon.style.animationDelay = `${Math.random() * 6}s`;
-        balloon.style.animationDuration = `${6 + Math.random() * 6}s`;
-        container.appendChild(balloon);
-      }
+    // 1. Envelope Transition & Initial Firework
+    function openGreeting() {
+      document.getElementById('envelopeScreen').classList.add('opened');
+      launchConfettiBurst();
+      
+      // Auto-start music on user tap
+      const audio = document.getElementById('bgAudio');
+      audio.play().then(() => {
+        document.getElementById('musicText').innerText = "Pause Music";
+      }).catch(() => {});
     }
 
-    // Toggle Music Playback
-    function toggleMusic() {
-      const music = document.getElementById('bgMusic');
-      const btn = document.getElementById('musicBtn');
+    // 2. Background Particle Animation
+    const canvas = document.getElementById('canvas-bg');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
 
-      if (music.paused) {
-        music.play();
-        btn.innerHTML = '⏸️ Pause Music';
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 1,
+        vy: -Math.random() * 0.5 - 0.2,
+        alpha: Math.random()
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.y += p.vy;
+        if (p.y < 0) p.y = canvas.height;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // 3. Audio Toggle
+    function toggleAudio() {
+      const audio = document.getElementById('bgAudio');
+      const text = document.getElementById('musicText');
+      if (audio.paused) {
+        audio.play();
+        text.innerText = "Pause Music";
       } else {
-        music.pause();
-        btn.innerHTML = '🎵 Play Music';
+        audio.pause();
+        text.innerText = "Play Music";
       }
     }
 
-    // Blow Candle Out
+    // 4. Candle Blow Effect
     function blowCandle() {
-      const flame = document.getElementById('flame');
+      const flame = document.getElementById('svgFlame');
       const hint = document.getElementById('cakeHint');
-
-      if (!flame.classList.contains('out')) {
-        flame.classList.add('out');
-        hint.innerHTML = '✨ Wish Made! ✨';
-        
-        confetti({
-          particleCount: 40,
-          spread: 60,
-          origin: { y: 0.6 }
-        });
-      }
-    }
-
-    // Trigger Final Confetti
-    function triggerSurprise() {
+      flame.style.display = 'none';
+      hint.innerText = "✨ Wish Sent to the Stars! ✨";
+      
       confetti({
-        particleCount: 150,
-        spread: 90,
+        particleCount: 50,
+        spread: 60,
         origin: { y: 0.6 }
       });
-
-      const surpriseBox = document.getElementById('hiddenSurprise');
-      surpriseBox.style.display = 'block';
     }
 
-    // Initialize Page
-    window.addEventListener('load', () => {
-      createBalloons();
-      setTimeout(() => {
-        confetti({ particleCount: 30, spread: 50, origin: { y: 0.7 } });
-      }, 500);
-    });
+    // 5. Confetti Launcher
+    function launchConfettiBurst() {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    }
+
+    function launchSurprise() {
+      launchConfettiBurst();
+      document.getElementById('surpriseNote').style.display = 'block';
+    }
+
+    // 6. Live Timer Counter Loop
+    function updateTimer() {
+      const now = new Date();
+      document.getElementById('secs').innerText = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('mins').innerText = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('hours').innerText = String(now.getHours()).padStart(2, '0');
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
   </script>
 </body>
 </html>
