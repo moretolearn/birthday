@@ -13,391 +13,414 @@
       padding: 0;
       background: #f2f4f8;
       font-family: Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     table {
+      border-spacing: 0;
       border-collapse: collapse;
     }
 
     img {
       border: 0;
       display: block;
-      max-width: 100%;
     }
 
-    .container {
+    a {
+      text-decoration: none;
+    }
+
+    .email {
       width: 100%;
-      padding: 35px 15px;
+      background: #f2f4f8;
+      padding: 40px 15px;
     }
 
     .card {
       width: 100%;
-      max-width: 620px;
-      margin: auto;
+      max-width: 640px;
+      margin: 0 auto;
       background: #ffffff;
-      border-radius: 24px;
+      border-radius: 28px;
       overflow: hidden;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.10);
+      box-shadow: 0 20px 60px rgba(20, 25, 40, 0.12);
     }
 
-    /* TOP SECTION */
+    /* HERO */
 
-    .top {
-      padding: 45px 35px 40px;
+    .hero {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.20), transparent 25%),
+        radial-gradient(circle at 85% 80%, rgba(255,255,255,.18), transparent 30%),
+        linear-gradient(135deg, #111827 0%, #312e81 50%, #7c3aed 100%);
+      padding: 55px 35px 60px;
       text-align: center;
-      background: linear-gradient(
-        135deg,
-        #111827,
-        #312e81,
-        #7c3aed
-      );
       color: #ffffff;
     }
 
-    .small-title {
-      font-size: 13px;
+    .eyebrow {
+      font-size: 12px;
+      font-weight: bold;
       letter-spacing: 3px;
       text-transform: uppercase;
-      opacity: 0.75;
-      margin-bottom: 18px;
+      color: #c4b5fd;
+      margin-bottom: 22px;
     }
 
-    .birthday-number {
-      font-size: 82px;
+    .cake {
+      font-size: 72px;
       line-height: 1;
-      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .hero-title {
       margin: 0;
+      font-size: 48px;
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -1.5px;
     }
 
-    .birthday-text {
-      font-size: 30px;
-      font-weight: 700;
-      margin-top: 12px;
+    .hero-text {
+      margin: 18px auto 0;
+      max-width: 430px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #e5e7eb;
     }
 
-    .emoji {
-      font-size: 42px;
-      margin-top: 18px;
-    }
+    /* MAIN */
 
-    /* PROFILE */
-
-    .profile {
+    .content {
+      padding: 48px 48px 45px;
       text-align: center;
-      padding: 35px 30px 10px;
     }
 
-    .profile-circle {
-      width: 100px;
-      height: 100px;
-      margin: auto;
-      border-radius: 50%;
-      background: linear-gradient(
-        135deg,
-        #8b5cf6,
-        #ec4899
-      );
-      padding: 4px;
-      box-sizing: border-box;
-    }
-
-    .profile-circle img {
-      width: 92px;
-      height: 92px;
-      border-radius: 50%;
-      object-fit: cover;
+    .hello {
+      margin: 0;
+      font-size: 29px;
+      line-height: 1.3;
+      font-weight: 800;
+      color: #111827;
     }
 
     .name {
-      margin: 18px 0 5px;
-      font-size: 27px;
-      color: #111827;
-      font-weight: 700;
-    }
-
-    .subtitle {
-      margin: 0;
-      font-size: 14px;
-      color: #9ca3af;
-    }
-
-    /* MESSAGE */
-
-    .message-section {
-      padding: 25px 40px 35px;
-      text-align: center;
+      color: #7c3aed;
     }
 
     .message {
+      max-width: 510px;
+      margin: 20px auto 0;
       font-size: 16px;
-      line-height: 1.8;
+      line-height: 1.85;
       color: #6b7280;
+    }
+
+    /* FEATURE CARD */
+
+    .feature {
+      margin-top: 34px;
+      padding: 28px 25px;
+      border-radius: 20px;
+      background: #faf5ff;
+      border: 1px solid #ede9fe;
+    }
+
+    .feature-icon {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+
+    .feature-title {
       margin: 0;
+      font-size: 20px;
+      color: #4c1d95;
+      font-weight: 800;
     }
 
-    /* HIGHLIGHTS */
-
-    .highlights {
-      padding: 0 30px 30px;
-    }
-
-    .highlight {
-      text-align: center;
-      background: #f9fafb;
-      border-radius: 16px;
-      padding: 20px 10px;
-    }
-
-    .highlight-icon {
-      font-size: 27px;
-    }
-
-    .highlight-title {
-      margin-top: 8px;
+    .feature-text {
+      margin: 10px auto 0;
+      max-width: 450px;
       font-size: 14px;
+      line-height: 1.7;
+      color: #6b7280;
+    }
+
+    /* WISH GRID */
+
+    .wish-table {
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .wish-cell {
+      width: 33.33%;
+      padding: 10px;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .wish-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      line-height: 48px;
+      font-size: 21px;
+    }
+
+    .wish-title {
+      font-size: 13px;
       font-weight: 700;
       color: #374151;
     }
 
-    /* BUTTON */
+    /* CTA */
 
-    .button-section {
-      text-align: center;
-      padding: 10px 30px 40px;
+    .cta {
+      margin-top: 38px;
     }
 
     .button {
       display: inline-block;
-      padding: 15px 32px;
-      border-radius: 50px;
-      background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #ec4899
-      );
+      padding: 16px 34px;
+      border-radius: 100px;
+      background: #111827;
       color: #ffffff !important;
-      text-decoration: none;
       font-size: 15px;
       font-weight: 700;
+      letter-spacing: .1px;
     }
 
-    /* LINK */
+    .button:hover {
+      background: #312e81;
+    }
 
-    .link {
-      margin-top: 18px;
-      font-size: 11px;
-      line-height: 1.6;
+    /* FALLBACK */
+
+    .fallback {
+      margin-top: 22px;
+      font-size: 12px;
+      line-height: 1.7;
       color: #9ca3af;
-      word-break: break-all;
+      word-break: break-word;
     }
 
-    .link a {
+    .fallback a {
       color: #7c3aed;
-      text-decoration: none;
     }
 
     /* FOOTER */
 
     .footer {
-      padding: 25px;
-      text-align: center;
+      padding: 25px 30px;
       background: #f9fafb;
+      border-top: 1px solid #f0f1f3;
+      text-align: center;
       color: #9ca3af;
       font-size: 12px;
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+
+    .footer strong {
+      color: #6b7280;
     }
 
     /* MOBILE */
 
-    @media only screen and (max-width: 600px) {
+    @media screen and (max-width: 600px) {
 
-      .container {
+      .email {
         padding: 15px 8px;
       }
 
-      .top {
-        padding: 40px 20px;
+      .hero {
+        padding: 45px 20px 50px;
       }
 
-      .birthday-number {
-        font-size: 65px;
+      .hero-title {
+        font-size: 37px;
       }
 
-      .birthday-text {
-        font-size: 25px;
+      .cake {
+        font-size: 60px;
       }
 
-      .message-section {
-        padding: 25px 25px 30px;
+      .content {
+        padding: 35px 22px 38px;
       }
 
-      .profile {
-        padding-top: 30px;
+      .hello {
+        font-size: 24px;
+      }
+
+      .message {
+        font-size: 15px;
+      }
+
+      .wish-cell {
+        padding: 5px;
+      }
+
+      .button {
+        width: 100%;
+        padding: 16px 10px;
       }
     }
-
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <div class="email">
 
     <div class="card">
 
-      <!-- ================================= -->
+      <!-- ============================= -->
       <!-- HERO -->
-      <!-- ================================= -->
+      <!-- ============================= -->
 
-      <div class="top">
+      <div class="hero">
 
-        <div class="small-title">
-          A Special Day
+        <div class="eyebrow">
+          A little celebration for you
         </div>
 
-        <div class="birthday-number">
-          🎉
+        <div class="cake">
+          🎂
         </div>
 
-        <div class="birthday-text">
-          Happy Birthday
-        </div>
+        <h1 class="hero-title">
+          Happy Birthday!
+        </h1>
 
-        <div class="emoji">
-          🎂 ✨ 🎈
-        </div>
-
-      </div>
-
-
-      <!-- ================================= -->
-      <!-- PROFILE -->
-      <!-- ================================= -->
-
-      <div class="profile">
-
-        <div class="profile-circle">
-
-          <img
-            src="{{PROFILE_IMAGE}}"
-            alt="Birthday Person"
-          >
-
-        </div>
-
-        <div class="name">
-          {{NAME}}
-        </div>
-
-        <p class="subtitle">
-          Today is your day! 🌟
+        <p class="hero-text">
+          Today deserves a little extra happiness,
+          a lot of smiles, and a celebration to remember.
         </p>
 
       </div>
 
 
-      <!-- ================================= -->
-      <!-- MESSAGE -->
-      <!-- ================================= -->
+      <!-- ============================= -->
+      <!-- CONTENT -->
+      <!-- ============================= -->
 
-      <div class="message-section">
+      <div class="content">
+
+        <h2 class="hello">
+          Happy Birthday, <span class="name">{{NAME}}</span>! 🎉
+        </h2>
 
         <p class="message">
 
-          Wishing you a birthday filled with
-          happiness, laughter and wonderful memories.
-          May this new year of your life bring you
-          exciting opportunities, success and
-          countless reasons to smile.
+          Wishing you a wonderful birthday filled with
+          happiness, laughter and beautiful moments.
+
+          May the year ahead bring exciting opportunities,
+          meaningful experiences and plenty of reasons
+          to smile.
 
         </p>
 
-      </div>
+
+        <!-- ============================= -->
+        <!-- FEATURE -->
+        <!-- ============================= -->
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            ✨
+          </div>
+
+          <h3 class="feature-title">
+            Here's to your next great chapter
+          </h3>
+
+          <p class="feature-text">
+
+            May this new year of your life be your
+            happiest, most successful and most memorable
+            one yet.
+
+          </p>
+
+        </div>
 
 
-      <!-- ================================= -->
-      <!-- HIGHLIGHTS -->
-      <!-- ================================= -->
+        <!-- ============================= -->
+        <!-- WISHES -->
+        <!-- ============================= -->
 
-      <div class="highlights">
-
-        <table width="100%">
-
+        <table class="wish-table" width="100%">
           <tr>
 
-            <td width="33%" style="padding:5px;">
+            <td class="wish-cell">
 
-              <div class="highlight">
+              <div class="wish-icon">
+                🌟
+              </div>
 
-                <div class="highlight-icon">
-                  🎯
-                </div>
-
-                <div class="highlight-title">
-                  New Goals
-                </div>
-
+              <div class="wish-title">
+                Happiness
               </div>
 
             </td>
 
 
-            <td width="33%" style="padding:5px;">
+            <td class="wish-cell">
 
-              <div class="highlight">
+              <div class="wish-icon">
+                🚀
+              </div>
 
-                <div class="highlight-icon">
-                  ✨
-                </div>
-
-                <div class="highlight-title">
-                  Great Moments
-                </div>
-
+              <div class="wish-title">
+                Success
               </div>
 
             </td>
 
 
-            <td width="33%" style="padding:5px;">
+            <td class="wish-cell">
 
-              <div class="highlight">
+              <div class="wish-icon">
+                ❤️
+              </div>
 
-                <div class="highlight-icon">
-                  ❤️
-                </div>
-
-                <div class="highlight-title">
-                  More Happiness
-                </div>
-
+              <div class="wish-title">
+                Great Memories
               </div>
 
             </td>
 
           </tr>
-
         </table>
 
-      </div>
+
+        <!-- ============================= -->
+        <!-- CTA -->
+        <!-- ============================= -->
+
+        <div class="cta">
+
+          <a
+            href="{{BIRTHDAY_LINK}}"
+            target="_blank"
+            class="button"
+          >
+            🎁 Open Your Birthday Surprise
+          </a>
+
+        </div>
 
 
-      <!-- ================================= -->
-      <!-- SURPRISE BUTTON -->
-      <!-- ================================= -->
+        <!-- ============================= -->
+        <!-- FALLBACK LINK -->
+        <!-- ============================= -->
 
-      <div class="button-section">
-
-        <a
-          href="{{BIRTHDAY_LINK}}"
-          target="_blank"
-          class="button"
-        >
-          🎁 Open Your Birthday Surprise
-        </a>
-
-
-        <div class="link">
+        <div class="fallback">
 
           Having trouble with the button?
 
@@ -415,17 +438,18 @@
       </div>
 
 
-      <!-- ================================= -->
+      <!-- ============================= -->
       <!-- FOOTER -->
-      <!-- ================================= -->
+      <!-- ============================= -->
 
       <div class="footer">
 
-        🎈 Have an amazing birthday, {{NAME}}!
+        🎈 Wishing you an amazing birthday, <strong>{{NAME}}</strong>!
 
         <br>
 
-        May your year ahead be your best one yet. ❤️
+        May your year ahead be filled with happiness,
+        success and unforgettable moments.
 
       </div>
 
