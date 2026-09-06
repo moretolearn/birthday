@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday!</title>
   
-  <!-- External Fonts & Libraries -->
+  <!-- External Fonts & Confetti Library -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -53,7 +53,7 @@
       transition: background 0.8s ease;
     }
 
-    /* Floating Animated Canvas */
+    /* Floating Animated Canvas Background */
     #particle-canvas {
       position: fixed;
       inset: 0;
@@ -240,22 +240,57 @@
       box-shadow: 0 14px 35px rgba(0,0,0,0.4);
     }
 
-    /* Modal / Note display */
+    /* Modal / Secret Note */
     .secret-box {
       display: none;
       margin-top: 20px;
       padding: 16px;
       background: rgba(255, 255, 255, 0.1);
-      border: 1px stroke var(--gold);
+      border: 1px solid var(--gold);
       border-radius: 16px;
       font-size: 0.95rem;
       color: var(--gold);
+    }
+
+    /* Floating Music Toggle Button */
+    .music-toggle-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .music-toggle-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .music-toggle-btn.playing {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
     }
   </style>
 </head>
 <body>
 
-  <!-- Particle Effect Layer -->
+  <!-- Particle Layer -->
   <canvas id="particle-canvas"></canvas>
 
   <!-- Opening Envelope Screen -->
@@ -264,7 +299,7 @@
     <button class="gift-btn" onclick="startExperience()">Open Birthday Card 🎁</button>
   </div>
 
-  <!-- Main Interactive Card -->
+  <!-- Main Card Container -->
   <div class="card-container">
     
     <!-- Top Utilities -->
@@ -318,33 +353,19 @@
 
   </div>
 
+  <!-- Floating Audio Button & Audio Element -->
+  <button class="music-toggle-btn" id="musicBtn" onclick="toggleMusic()">
+    <span id="musicIcon">🎵</span>
+    <span id="musicText">Play Music</span>
+  </button>
+
+  <!-- Replace song.mp3 with your actual MP3 file or path -->
+  <audio id="bgSong" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg" />
+  </audio>
+
   <script>
-    // 1. Web Audio Synthesizer (No external MP3 required)
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    let audioCtx;
-
-    function playNote(freq, type = 'sine', duration = 0.3) {
-      if (!audioCtx) audioCtx = new AudioCtx();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    }
-
-    function playChime() {
-      const notes = [523.25, 659.25, 783.99, 1046.50];
-      notes.forEach((freq, idx) => {
-        setTimeout(() => playNote(freq, 'triangle', 0.5), idx * 120);
-      });
-    }
-
-    // 2. Parse URL Query Parameters
+    // 1. URL Query Parameter Handler (?name=Sarah&wish=Your+Custom+Wish)
     function parseURLParams() {
       const params = new URLSearchParams(window.location.search);
       const name = params.get('name');
@@ -359,10 +380,70 @@
     }
     parseURLParams();
 
-    // 3. Start Experience
+    // 2. Audio Control Functions
+    function toggleMusic() {
+      const song = document.getElementById('bgSong');
+      const btn = document.getElementById('musicBtn');
+      const icon = document.getElementById('musicIcon');
+      const text = document.getElementById('musicText');
+
+      if (song.paused) {
+        song.volume = 0.5;
+        song.play().then(() => {
+          btn.classList.add('playing');
+          icon.innerText = '⏸️';
+          text.innerText = 'Pause Music';
+        }).catch(err => console.log('Audio playback prevented:', err));
+      } else {
+        song.pause();
+        btn.classList.remove('playing');
+        icon.innerText = '🎵';
+        text.innerText = 'Play Music';
+      }
+    }
+
+    function fadeOutMusic(duration = 1500) {
+      const song = document.getElementById('bgSong');
+      const btn = document.getElementById('musicBtn');
+      
+      if (!song || song.paused) return;
+
+      const startVolume = song.volume;
+      const intervalTime = 50;
+      const step = startVolume / (duration / intervalTime);
+
+      const fadeInterval = setInterval(() => {
+        if (song.volume > step) {
+          song.volume -= step;
+        } else {
+          song.volume = 0;
+          song.pause();
+          clearInterval(fadeInterval);
+          song.volume = startVolume;
+
+          if (btn) {
+            btn.classList.remove('playing');
+            document.getElementById('musicIcon').innerText = '🎵';
+            document.getElementById('musicText').innerText = 'Play Music';
+          }
+        }
+      }, intervalTime);
+    }
+
+    // 3. Experience Initializer
     function startExperience() {
       document.getElementById('overlay').classList.add('dismissed');
-      playChime();
+      
+      // Auto-start music
+      const song = document.getElementById('bgSong');
+      song.volume = 0.5;
+      song.play().then(() => {
+        const btn = document.getElementById('musicBtn');
+        btn.classList.add('playing');
+        document.getElementById('musicIcon').innerText = '⏸️';
+        document.getElementById('musicText').innerText = 'Pause Music';
+      }).catch(err => console.log('Autoplay prevented:', err));
+
       launchConfetti();
     }
 
@@ -374,22 +455,24 @@
       }
     }
 
-    // 5. Candle Blowing Event
+    // 5. Candle Blowing Handler
     function blowOutCandle() {
       const flame = document.getElementById('candleFlame');
       const status = document.getElementById('cakeStatus');
-      flame.style.display = 'none';
-      status.innerText = "✨ Your Wish Is Sent! ✨";
-      playNote(880, 'sine', 0.6);
       
+      if (flame) flame.style.display = 'none';
+      if (status) status.innerText = "✨ Your Wish Is Sent! ✨";
+
+      fadeOutMusic(1500);
+
       confetti({
-        particleCount: 40,
-        spread: 50,
+        particleCount: 50,
+        spread: 60,
         origin: { y: 0.6 }
       });
     }
 
-    // 6. Confetti & Celebration
+    // 6. Celebration Triggers
     function launchConfetti() {
       confetti({
         particleCount: 100,
@@ -399,12 +482,11 @@
     }
 
     function triggerCelebration() {
-      playChime();
       launchConfetti();
       document.getElementById('secretNote').style.display = 'block';
     }
 
-    // 7. Ambient Background Particles
+    // 7. Ambient Canvas Particle Animation
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
