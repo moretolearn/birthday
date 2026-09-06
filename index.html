@@ -11,26 +11,37 @@
 
   <style>
     :root {
+      --bg-gradient: radial-gradient(circle at top left, #2c1a04, #0f0b03, #1f1402);
+      --card-bg: rgba(30, 22, 10, 0.45);
+      --card-border: rgba(255, 215, 0, 0.35);
+      --accent-color: #f39c12;
+      --gold-light: #ffeaa7;
+      --gold-main: #ffd700;
+      --gold-dark: #d4af37;
+      --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+      --text-main: #ffffff;
+      --text-muted: rgba(255, 235, 175, 0.75);
+    }
+
+    /* Theme Overrides */
+    body.theme-cyber {
+      --bg-gradient: radial-gradient(circle at top left, #032b2b, #020d18, #18022b);
+      --card-bg: rgba(255, 255, 255, 0.12);
+      --card-border: rgba(255, 255, 255, 0.25);
+      --accent-color: #00d2d3;
+      --gold-main: #ff9ff3;
+      --gold-gradient: linear-gradient(135deg, #00d2d3, #ff9ff3);
+      --text-muted: rgba(255, 255, 255, 0.75);
+    }
+
+    body.theme-rose {
       --bg-gradient: radial-gradient(circle at top left, #1a103c, #0b0f19, #2b0b23);
       --card-bg: rgba(255, 255, 255, 0.12);
       --card-border: rgba(255, 255, 255, 0.25);
       --accent-color: #ff3366;
-      --gold: #ffd700;
-      --text-main: #ffffff;
+      --gold-main: #ff6b81;
+      --gold-gradient: linear-gradient(135deg, #ff3366, #ff6b81);
       --text-muted: rgba(255, 255, 255, 0.75);
-    }
-
-    /* Theme Overrides */
-    body.theme-gold {
-      --bg-gradient: radial-gradient(circle at top left, #2c1a04, #0f0b03, #1f1402);
-      --accent-color: #f39c12;
-      --gold: #ffeaa7;
-    }
-
-    body.theme-cyber {
-      --bg-gradient: radial-gradient(circle at top left, #032b2b, #020d18, #18022b);
-      --accent-color: #00d2d3;
-      --gold: #ff9ff3;
     }
 
     * {
@@ -65,7 +76,7 @@
     .hero-overlay {
       position: fixed;
       inset: 0;
-      background: #0b0f19;
+      background: #0f0b03;
       z-index: 1000;
       display: flex;
       flex-direction: column;
@@ -83,22 +94,22 @@
     }
 
     .gift-btn {
-      background: linear-gradient(135deg, var(--accent-color), #ff6b81);
-      color: white;
+      background: var(--gold-gradient);
+      color: #000000;
       border: none;
       padding: 20px 48px;
       font-size: 1.25rem;
-      font-weight: 700;
+      font-weight: 800;
       border-radius: 60px;
       cursor: pointer;
-      box-shadow: 0 12px 35px rgba(255, 51, 102, 0.4);
+      box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       letter-spacing: 0.5px;
     }
 
     .gift-btn:hover {
       transform: scale(1.08);
-      box-shadow: 0 18px 45px rgba(255, 51, 102, 0.6);
+      box-shadow: 0 18px 45px rgba(255, 215, 0, 0.6);
     }
 
     /* Main Modern Glass Card */
@@ -114,7 +125,7 @@
       border-radius: 36px;
       padding: 44px 32px;
       text-align: center;
-      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255, 215, 0, 0.08);
     }
 
     /* Controls Bar */
@@ -156,15 +167,17 @@
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      border: 3px solid var(--gold-main);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
     }
 
     /* Typography */
     h1.recipient-name {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
-      color: var(--gold);
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 10px;
       line-height: 1.2;
     }
@@ -206,7 +219,7 @@
       border-radius: 16px;
       overflow: hidden;
       aspect-ratio: 1;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid var(--card-border);
       transition: transform 0.3s ease;
     }
 
@@ -223,21 +236,21 @@
     /* Action Buttons */
     .cta-button {
       width: 100%;
-      background: linear-gradient(135deg, var(--accent-color), var(--gold));
-      color: #000;
+      background: var(--gold-gradient);
+      color: #000000;
       border: none;
       padding: 18px;
       border-radius: 20px;
       font-size: 1.05rem;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .cta-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 35px rgba(0,0,0,0.4);
+      box-shadow: 0 14px 35px rgba(255, 215, 0, 0.5);
     }
 
     /* Modal / Secret Note */
@@ -245,11 +258,11 @@
       display: none;
       margin-top: 20px;
       padding: 16px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--gold);
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid var(--gold-dark);
       border-radius: 16px;
       font-size: 0.95rem;
-      color: var(--gold);
+      color: var(--gold-light);
     }
 
     /* Floating Music Toggle Button */
@@ -258,11 +271,11 @@
       bottom: 24px;
       right: 24px;
       z-index: 100;
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(15, 11, 3, 0.85);
       border: 1px solid var(--card-border);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      color: #ffffff;
+      color: var(--gold-light);
       padding: 12px 20px;
       border-radius: 40px;
       font-family: inherit;
@@ -272,19 +285,19 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .music-toggle-btn:hover {
       transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 12px 30px rgba(255, 215, 0, 0.3);
+      background: rgba(25, 18, 5, 0.95);
     }
 
     .music-toggle-btn.playing {
-      border-color: var(--accent-color);
-      box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
+      border-color: var(--gold-main);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
     }
   </style>
 </head>
@@ -295,7 +308,7 @@
 
   <!-- Opening Envelope Screen -->
   <div class="hero-overlay" id="overlay">
-    <h2 style="font-weight: 300; letter-spacing: 3px; margin-bottom: 24px; color: var(--gold);">SPECIAL CELEBRATION</h2>
+    <h2 style="font-weight: 300; letter-spacing: 3px; margin-bottom: 24px; color: var(--gold-light);">SPECIAL CELEBRATION</h2>
     <button class="gift-btn" onclick="startExperience()">Open Birthday Card 🎁</button>
   </div>
 
@@ -306,9 +319,9 @@
     <div class="top-controls">
       <span style="font-size: 0.8rem; color: var(--text-muted);">SELECT THEME:</span>
       <div class="theme-selector">
-        <div class="theme-dot" style="background: #ff3366;" onclick="setTheme('default')"></div>
         <div class="theme-dot" style="background: #f39c12;" onclick="setTheme('gold')"></div>
         <div class="theme-dot" style="background: #00d2d3;" onclick="setTheme('cyber')"></div>
+        <div class="theme-dot" style="background: #ff3366;" onclick="setTheme('rose')"></div>
       </div>
     </div>
 
@@ -326,9 +339,9 @@
     <!-- Interactive Cake & Candle -->
     <div class="cake-zone" onclick="blowOutCandle()">
       <svg width="110" height="110" viewBox="0 0 100 100">
-        <!-- Base -->
-        <rect x="20" y="65" width="60" height="25" rx="5" fill="#ff4757" />
-        <rect x="30" y="45" width="40" height="20" rx="3" fill="#ffffff" />
+        <!-- Base Layer -->
+        <rect x="20" y="65" width="60" height="25" rx="5" fill="#d4af37" />
+        <rect x="30" y="45" width="40" height="20" rx="3" fill="#ffeaa7" />
         <!-- Candle -->
         <rect x="47" y="28" width="6" height="17" rx="2" fill="#ffd700" />
         <!-- Flame -->
@@ -359,7 +372,6 @@
     <span id="musicText">Play Music</span>
   </button>
 
-  <!-- Replace song.mp3 with your actual MP3 file or path -->
   <audio id="bgSong" loop preload="auto">
     <source src="song.mp3" type="audio/mpeg" />
   </audio>
@@ -434,7 +446,6 @@
     function startExperience() {
       document.getElementById('overlay').classList.add('dismissed');
       
-      // Auto-start music
       const song = document.getElementById('bgSong');
       song.volume = 0.5;
       song.play().then(() => {
@@ -450,7 +461,7 @@
     // 4. Theme Switching
     function setTheme(theme) {
       document.body.className = '';
-      if (theme !== 'default') {
+      if (theme !== 'gold') {
         document.body.classList.add(`theme-${theme}`);
       }
     }
@@ -468,6 +479,7 @@
       confetti({
         particleCount: 50,
         spread: 60,
+        colors: ['#ffd700', '#ffeaa7', '#ffffff', '#d4af37'],
         origin: { y: 0.6 }
       });
     }
@@ -477,6 +489,7 @@
       confetti({
         particleCount: 100,
         spread: 70,
+        colors: ['#ffd700', '#ffeaa7', '#ffffff', '#d4af37', '#f39c12'],
         origin: { y: 0.6 }
       });
     }
@@ -486,7 +499,7 @@
       document.getElementById('secretNote').style.display = 'block';
     }
 
-    // 7. Ambient Canvas Particle Animation
+    // 7. Ambient Warm Gold Particle Animation
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -498,13 +511,13 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    for (let i = 0; i < 45; i++) {
+    for (let i = 0; i < 50; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 1,
-        dy: -Math.random() * 0.6 - 0.2,
-        a: Math.random()
+        r: Math.random() * 2.2 + 0.8,
+        dy: -Math.random() * 0.5 - 0.15,
+        a: Math.random() * 0.8 + 0.2
       });
     }
 
@@ -515,7 +528,7 @@
         if (p.y < 0) p.y = canvas.height;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.a})`;
+        ctx.fillStyle = `rgba(255, 215, 0, ${p.a})`;
         ctx.fill();
       });
       requestAnimationFrame(renderParticles);
