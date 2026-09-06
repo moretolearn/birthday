@@ -1,460 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Happy Birthday</title>
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #f2f4f8;
-      font-family: Arial, Helvetica, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    table {
-      border-spacing: 0;
-      border-collapse: collapse;
-    }
-
-    img {
-      border: 0;
-      display: block;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    .email {
-      width: 100%;
-      background: #f2f4f8;
-      padding: 40px 15px;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 640px;
-      margin: 0 auto;
-      background: #ffffff;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(20, 25, 40, 0.12);
-    }
-
-    /* HERO */
-
-    .hero {
-      background:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,.20), transparent 25%),
-        radial-gradient(circle at 85% 80%, rgba(255,255,255,.18), transparent 30%),
-        linear-gradient(135deg, #111827 0%, #312e81 50%, #7c3aed 100%);
-      padding: 55px 35px 60px;
-      text-align: center;
-      color: #ffffff;
-    }
-
-    .eyebrow {
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #c4b5fd;
-      margin-bottom: 22px;
-    }
-
-    .cake {
-      font-size: 72px;
-      line-height: 1;
-      margin-bottom: 22px;
-    }
-
-    .hero-title {
-      margin: 0;
-      font-size: 48px;
-      line-height: 1.08;
-      font-weight: 800;
-      letter-spacing: -1.5px;
-    }
-
-    .hero-text {
-      margin: 18px auto 0;
-      max-width: 430px;
-      font-size: 17px;
-      line-height: 1.7;
-      color: #e5e7eb;
-    }
-
-    /* MAIN */
-
-    .content {
-      padding: 48px 48px 45px;
-      text-align: center;
-    }
-
-    .hello {
-      margin: 0;
-      font-size: 29px;
-      line-height: 1.3;
-      font-weight: 800;
-      color: #111827;
-    }
-
-    .name {
-      color: #7c3aed;
-    }
-
-    .message {
-      max-width: 510px;
-      margin: 20px auto 0;
-      font-size: 16px;
-      line-height: 1.85;
-      color: #6b7280;
-    }
-
-    /* FEATURE CARD */
-
-    .feature {
-      margin-top: 34px;
-      padding: 28px 25px;
-      border-radius: 20px;
-      background: #faf5ff;
-      border: 1px solid #ede9fe;
-    }
-
-    .feature-icon {
-      font-size: 35px;
-      margin-bottom: 10px;
-    }
-
-    .feature-title {
-      margin: 0;
-      font-size: 20px;
-      color: #4c1d95;
-      font-weight: 800;
-    }
-
-    .feature-text {
-      margin: 10px auto 0;
-      max-width: 450px;
-      font-size: 14px;
-      line-height: 1.7;
-      color: #6b7280;
-    }
-
-    /* WISH GRID */
-
-    .wish-table {
-      width: 100%;
-      margin-top: 30px;
-    }
-
-    .wish-cell {
-      width: 33.33%;
-      padding: 10px;
-      text-align: center;
-      vertical-align: top;
-    }
-
-    .wish-icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 10px;
-      border-radius: 50%;
-      background: #f3f4f6;
-      line-height: 48px;
-      font-size: 21px;
-    }
-
-    .wish-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #374151;
-    }
-
-    /* CTA */
-
-    .cta {
-      margin-top: 38px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 16px 34px;
-      border-radius: 100px;
-      background: #111827;
-      color: #ffffff !important;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: .1px;
-    }
-
-    .button:hover {
-      background: #312e81;
-    }
-
-    /* FALLBACK */
-
-    .fallback {
-      margin-top: 22px;
-      font-size: 12px;
-      line-height: 1.7;
-      color: #9ca3af;
-      word-break: break-word;
-    }
-
-    .fallback a {
-      color: #7c3aed;
-    }
-
-    /* FOOTER */
-
-    .footer {
-      padding: 25px 30px;
-      background: #f9fafb;
-      border-top: 1px solid #f0f1f3;
-      text-align: center;
-      color: #9ca3af;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .footer strong {
-      color: #6b7280;
-    }
-
-    /* MOBILE */
-
-    @media screen and (max-width: 600px) {
-
-      .email {
-        padding: 15px 8px;
-      }
-
-      .hero {
-        padding: 45px 20px 50px;
-      }
-
-      .hero-title {
-        font-size: 37px;
-      }
-
-      .cake {
-        font-size: 60px;
-      }
-
-      .content {
-        padding: 35px 22px 38px;
-      }
-
-      .hello {
-        font-size: 24px;
-      }
-
-      .message {
-        font-size: 15px;
-      }
-
-      .wish-cell {
-        padding: 5px;
-      }
-
-      .button {
-        width: 100%;
-        padding: 16px 10px;
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
-
 <body>
 
-  <div class="email">
-
-    <div class="card">
-
-      <!-- ============================= -->
-      <!-- HERO -->
-      <!-- ============================= -->
-
-      <div class="hero">
-
-        <div class="eyebrow">
-          A little celebration for you
-        </div>
-
-        <div class="cake">
-          🎂
-        </div>
-
-        <h1 class="hero-title">
-          Happy Birthday!
-        </h1>
-
-        <p class="hero-text">
-          Today deserves a little extra happiness,
-          a lot of smiles, and a celebration to remember.
-        </p>
-
-      </div>
-
-
-      <!-- ============================= -->
-      <!-- CONTENT -->
-      <!-- ============================= -->
-
-      <div class="content">
-
-        <h2 class="hello">
-          Happy Birthday, <span class="name">{{NAME}}</span>! 🎉
-        </h2>
-
-        <p class="message">
-
-          Wishing you a wonderful birthday filled with
-          happiness, laughter and beautiful moments.
-
-          May the year ahead bring exciting opportunities,
-          meaningful experiences and plenty of reasons
-          to smile.
-
-        </p>
-
-
-        <!-- ============================= -->
-        <!-- FEATURE -->
-        <!-- ============================= -->
-
-        <div class="feature">
-
-          <div class="feature-icon">
-            ✨
-          </div>
-
-          <h3 class="feature-title">
-            Here's to your next great chapter
-          </h3>
-
-          <p class="feature-text">
-
-            May this new year of your life be your
-            happiest, most successful and most memorable
-            one yet.
-
-          </p>
-
-        </div>
-
-
-        <!-- ============================= -->
-        <!-- WISHES -->
-        <!-- ============================= -->
-
-        <table class="wish-table" width="100%">
-          <tr>
-
-            <td class="wish-cell">
-
-              <div class="wish-icon">
-                🌟
-              </div>
-
-              <div class="wish-title">
-                Happiness
-              </div>
-
-            </td>
-
-
-            <td class="wish-cell">
-
-              <div class="wish-icon">
-                🚀
-              </div>
-
-              <div class="wish-title">
-                Success
-              </div>
-
-            </td>
-
-
-            <td class="wish-cell">
-
-              <div class="wish-icon">
-                ❤️
-              </div>
-
-              <div class="wish-title">
-                Great Memories
-              </div>
-
-            </td>
-
-          </tr>
-        </table>
-
-
-        <!-- ============================= -->
-        <!-- CTA -->
-        <!-- ============================= -->
-
-        <div class="cta">
-
-          <a
-            href="{{BIRTHDAY_LINK}}"
-            target="_blank"
-            class="button"
-          >
-            🎁 Open Your Birthday Surprise
-          </a>
-
-        </div>
-
-
-        <!-- ============================= -->
-        <!-- FALLBACK LINK -->
-        <!-- ============================= -->
-
-        <div class="fallback">
-
-          Having trouble with the button?
-
-          <br>
-
-          <a
-            href="{{BIRTHDAY_LINK}}"
-            target="_blank"
-          >
-            {{BIRTHDAY_LINK}}
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <!-- ============================= -->
-      <!-- FOOTER -->
-      <!-- ============================= -->
-
-      <div class="footer">
-
-        🎈 Wishing you an amazing birthday, <strong>{{NAME}}</strong>!
-
-        <br>
-
-        May your year ahead be filled with happiness,
-        success and unforgettable moments.
-
-      </div>
-
+  <div class="card">
+    <div class="photo-wrapper">
+      <!-- REPLACE WITH YOUR PERSON'S PHOTO URL OR LOCAL IMAGE -->
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop" alt="Birthday Person" id="avatar" />
     </div>
 
+    <h1 class="title">Happy Birthday, <span id="name">Sarah</span>! 🎂</h1>
+    <p class="subtitle">Wishing you a day filled with joy, laughter, and incredible memories!</p>
+
+    <div class="message-box">
+      <p>
+        "May this year bring you closer to your dreams, surround you with the people you love, 
+        and give you endless reasons to smile. Keep shining bright!" ✨
+      </p>
+    </div>
+
+    <button id="surpriseBtn" onclick="triggerSurprise()">Click for a Surprise! 🎉</button>
+
+    <div id="hiddenMessage" class="hidden">
+      🎁 <strong>Special Wish:</strong> Hope all your big goals for this year come true!
+    </div>
   </div>
 
+  <script>
+    // Trigger confetti and reveal message on click
+    function triggerSurprise() {
+      // Launch Confetti
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      // Show surprise text
+      const msg = document.getElementById("hiddenMessage");
+      msg.classList.remove("hidden");
+      msg.classList.add("show");
+    }
+
+    // Auto-fire soft confetti when page loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        confetti({ particleCount: 30, spread: 50, origin: { y: 0.7 } });
+      }, 500);
+    });
+  </script>
 </body>
 </html>
