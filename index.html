@@ -3,45 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday!</title>
+  <title>A Royal Celebration</title>
   
-  <!-- External Fonts & Confetti Library -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     :root {
-      --bg-gradient: radial-gradient(circle at top left, #2c1a04, #0f0b03, #1f1402);
-      --card-bg: rgba(30, 22, 10, 0.45);
-      --card-border: rgba(255, 215, 0, 0.35);
-      --accent-color: #f39c12;
-      --gold-light: #ffeaa7;
-      --gold-main: #ffd700;
-      --gold-dark: #d4af37;
+      --bg-dark: #070604;
+      --card-bg: rgba(20, 16, 10, 0.65);
       --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-      --text-main: #ffffff;
-      --text-muted: rgba(255, 235, 175, 0.75);
-    }
-
-    /* Theme Overrides */
-    body.theme-cyber {
-      --bg-gradient: radial-gradient(circle at top left, #032b2b, #020d18, #18022b);
-      --card-bg: rgba(255, 255, 255, 0.12);
-      --card-border: rgba(255, 255, 255, 0.25);
-      --accent-color: #00d2d3;
-      --gold-main: #ff9ff3;
-      --gold-gradient: linear-gradient(135deg, #00d2d3, #ff9ff3);
-      --text-muted: rgba(255, 255, 255, 0.75);
-    }
-
-    body.theme-rose {
-      --bg-gradient: radial-gradient(circle at top left, #1a103c, #0b0f19, #2b0b23);
-      --card-bg: rgba(255, 255, 255, 0.12);
-      --card-border: rgba(255, 255, 255, 0.25);
-      --accent-color: #ff3366;
-      --gold-main: #ff6b81;
-      --gold-gradient: linear-gradient(135deg, #ff3366, #ff6b81);
-      --text-muted: rgba(255, 255, 255, 0.75);
+      --gold-solid: #d4af37;
+      --gold-glow: rgba(212, 175, 55, 0.35);
+      --text-main: #fceea7;
+      --text-sub: #c5a059;
     }
 
     * {
@@ -52,19 +27,13 @@
 
     body {
       min-height: 100vh;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 24px 16px;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-dark);
+      color: #ffffff;
       overflow-x: hidden;
       position: relative;
-      transition: background 0.8s ease;
     }
 
-    /* Floating Animated Canvas Background */
     #particle-canvas {
       position: fixed;
       inset: 0;
@@ -72,434 +41,424 @@
       pointer-events: none;
     }
 
-    /* Interactive Overlay Screen */
-    .hero-overlay {
+    /* FULL PAGE OVERLAY COVER */
+    .hero-gate {
       position: fixed;
       inset: 0;
-      background: #0f0b03;
       z-index: 1000;
+      background: radial-gradient(circle at center, #181206 0%, #000000 100%);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       padding: 20px;
-      transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.6s ease;
+      transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
     }
 
-    .hero-overlay.dismissed {
+    .hero-gate.open {
       transform: translateY(-100%);
-      opacity: 0;
-      pointer-events: none;
     }
 
-    .gift-btn {
-      background: var(--gold-gradient);
-      color: #000000;
-      border: none;
-      padding: 20px 48px;
-      font-size: 1.25rem;
-      font-weight: 800;
-      border-radius: 60px;
-      cursor: pointer;
-      box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      letter-spacing: 0.5px;
-    }
-
-    .gift-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 18px 45px rgba(255, 215, 0, 0.6);
-    }
-
-    /* Main Modern Glass Card */
-    .card-container {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 560px;
-      background: var(--card-bg);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid var(--card-border);
-      border-radius: 36px;
-      padding: 44px 32px;
-      text-align: center;
-      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255, 215, 0, 0.08);
-    }
-
-    /* Controls Bar */
-    .top-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
-    .theme-selector {
-      display: flex;
-      gap: 8px;
-    }
-
-    .theme-dot {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid white;
-      transition: transform 0.2s;
-    }
-
-    .theme-dot:hover {
-      transform: scale(1.2);
-    }
-
-    /* Avatar & Badge */
-    .avatar-wrapper {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 20px;
-    }
-
-    .avatar-wrapper img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--gold-main);
-      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-    }
-
-    /* Typography */
-    h1.recipient-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+    .monogram {
+      font-family: 'Cinzel', serif;
+      font-size: 5rem;
       background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
-      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: 4px;
     }
 
-    p.custom-wish {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 28px;
-      font-weight: 300;
-    }
-
-    /* Interactive Candle Cake */
-    .cake-zone {
-      margin: 20px 0 32px;
+    .enter-btn {
+      background: transparent;
+      color: var(--gold-solid);
+      border: 1px solid var(--gold-solid);
+      padding: 18px 45px;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      letter-spacing: 3px;
       cursor: pointer;
-      display: inline-block;
-    }
-
-    .flame-light {
-      animation: pulseFlame 0.6s infinite alternate ease-in-out;
-      transform-origin: center;
-    }
-
-    @keyframes pulseFlame {
-      0% { transform: scale(1) rotate(-3deg); opacity: 0.85; }
-      100% { transform: scale(1.25) rotate(3deg); opacity: 1; }
-    }
-
-    /* Memory Collage */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-
-    .photo-item {
-      border-radius: 16px;
+      position: relative;
       overflow: hidden;
-      aspect-ratio: 1;
-      border: 1px solid var(--card-border);
+      transition: all 0.4s ease;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .enter-btn:hover {
+      background: var(--gold-gradient);
+      color: #000000;
+      box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
+      border-color: transparent;
+    }
+
+    /* MAIN FULL PAGE LAYOUT */
+    .page-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 24px 120px;
+    }
+
+    .header-banner {
+      text-align: center;
+      padding: 60px 20px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 60px;
+    }
+
+    .header-subtitle {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 6px;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .header-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .header-wish {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #d1c0a5;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      font-weight: 200;
+    }
+
+    /* GRID SECTION */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 900px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      backdrop-filter: blur(20px);
+      border-radius: 4px;
+      padding: 40px;
+      position: relative;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 5px; left: 5px; right: 5px; bottom: 5px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      pointer-events: none;
+    }
+
+    .card-heading {
+      font-family: 'Cinzel', serif;
+      color: var(--text-main);
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 12px;
+    }
+
+    /* CANDLE INTERACTIVE ZONE */
+    .candle-interactive {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .candle-svg {
+      cursor: pointer;
+      filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
       transition: transform 0.3s ease;
     }
 
-    .photo-item:hover {
-      transform: translateY(-4px);
+    .candle-svg:hover {
+      transform: scale(1.05);
     }
 
-    .photo-item img {
+    .flame {
+      animation: flicker 0.8s infinite alternate ease-in-out;
+      transform-origin: center;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+      100% { transform: scale(1.2) rotate(2deg); opacity: 1; }
+    }
+
+    /* GALLERY MASONRY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: grayscale(30%) contrast(110%);
+      transition: all 0.5s ease;
     }
 
-    /* Action Buttons */
-    .cta-button {
+    .gallery-item:hover img {
+      filter: grayscale(0%) scale(1.08);
+    }
+
+    /* COUNTDOWN / SURPRISE */
+    .gift-reveal-btn {
       width: 100%;
       background: var(--gold-gradient);
-      color: #000000;
+      color: #000;
       border: none;
-      padding: 18px;
-      border-radius: 20px;
-      font-size: 1.05rem;
-      font-weight: 800;
+      padding: 20px;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      letter-spacing: 2px;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 20px;
+      transition: opacity 0.3s;
     }
 
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 35px rgba(255, 215, 0, 0.5);
+    .gift-reveal-btn:hover {
+      opacity: 0.9;
     }
 
-    /* Modal / Secret Note */
-    .secret-box {
+    .reveal-content {
       display: none;
       margin-top: 20px;
-      padding: 16px;
-      background: rgba(255, 215, 0, 0.1);
-      border: 1px solid var(--gold-dark);
-      border-radius: 16px;
+      padding: 20px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px dashed var(--gold-solid);
+      color: var(--text-main);
       font-size: 0.95rem;
-      color: var(--gold-light);
+      line-height: 1.6;
     }
 
-    /* Floating Music Toggle Button */
-    .music-toggle-btn {
+    /* FLOATING BOTTOM DOCK */
+    .bottom-dock {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 100;
-      background: rgba(15, 11, 3, 0.85);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: var(--gold-light);
-      padding: 12px 20px;
-      border-radius: 40px;
-      font-family: inherit;
+      background: rgba(10, 8, 4, 0.85);
+      border: 1px solid var(--gold-solid);
+      backdrop-filter: blur(15px);
+      padding: 12px 30px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 20px var(--gold-glow);
+    }
+
+    .dock-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: 'Cinzel', serif;
       font-size: 0.85rem;
-      font-weight: 600;
+      letter-spacing: 1px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .music-toggle-btn:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 12px 30px rgba(255, 215, 0, 0.3);
-      background: rgba(25, 18, 5, 0.95);
-    }
-
-    .music-toggle-btn.playing {
-      border-color: var(--gold-main);
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    .dock-btn:hover {
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
 
-  <!-- Particle Layer -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Opening Envelope Screen -->
-  <div class="hero-overlay" id="overlay">
-    <h2 style="font-weight: 300; letter-spacing: 3px; margin-bottom: 24px; color: var(--gold-light);">SPECIAL CELEBRATION</h2>
-    <button class="gift-btn" onclick="startExperience()">Open Birthday Card 🎁</button>
+  <!-- FULL SCREEN COVER OVERLAY -->
+  <div class="hero-gate" id="gate">
+    <div class="monogram">HB</div>
+    <h1 style="font-family: 'Cinzel', serif; letter-spacing: 4px; margin-bottom: 30px; color: var(--text-main);">AN INVITATION TO CELEBRATE</h1>
+    <button class="enter-btn" onclick="openGate()">ENTER EXPERIENCE</button>
   </div>
 
-  <!-- Main Card Container -->
-  <div class="card-container">
+  <!-- FULL PAGE CONTENT -->
+  <div class="page-wrapper">
     
-    <!-- Top Utilities -->
-    <div class="top-controls">
-      <span style="font-size: 0.8rem; color: var(--text-muted);">SELECT THEME:</span>
-      <div class="theme-selector">
-        <div class="theme-dot" style="background: #f39c12;" onclick="setTheme('gold')"></div>
-        <div class="theme-dot" style="background: #00d2d3;" onclick="setTheme('cyber')"></div>
-        <div class="theme-dot" style="background: #ff3366;" onclick="setTheme('rose')"></div>
+    <!-- HEADER -->
+    <header class="header-banner">
+      <p class="header-subtitle">Royal Birthday Wishes</p>
+      <h1 class="header-title" id="displayTitle">Happy Birthday</h1>
+      <p class="header-wish" id="displayWish">
+        May this year bring unprecedented success, timeless joy, and memorable milestones. Step into a magnificent chapter ahead.
+      </p>
+    </header>
+
+    <!-- TWO COLUMN LAYOUT -->
+    <div class="main-grid">
+      
+      <!-- COLUMN 1: CANDLE & CEREMONY -->
+      <div class="glass-card">
+        <h2 class="card-heading">Make A Wish</h2>
+        <p style="color: #a89981; font-size: 0.9rem; margin-bottom: 20px; font-weight: 300;">
+          Blow out the golden flame to unlock your personalized celebration note.
+        </p>
+        
+        <div class="candle-interactive" onclick="extinguishFlame()">
+          <svg class="candle-svg" width="120" height="150" viewBox="0 0 100 120">
+            <!-- Candle Body -->
+            <rect x="42" y="40" width="16" height="60" rx="3" fill="url(#goldGrad)" />
+            <!-- Wick -->
+            <line x1="50" y1="40" x2="50" y2="30" stroke="#888" stroke-width="2" />
+            <!-- Flame -->
+            <path id="flameShape" class="flame" d="M 50 10 Q 42 22 50 30 Q 58 22 50 10 Z" fill="#fff59d" />
+            
+            <defs>
+              <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#bf953f" />
+                <stop offset="50%" stop-color="#fcf6ba" />
+                <stop offset="100%" stop-color="#aa771c" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <p id="wishStatus" style="font-family: 'Cinzel', serif; color: var(--gold-solid); margin-top: 15px; font-size: 0.85rem; letter-spacing: 1px;">
+            [ TAP FLAME TO BLOW OUT ]
+          </p>
+        </div>
+      </div>
+
+      <!-- COLUMN 2: MEMORY GALLERY -->
+      <div class="glass-card">
+        <h2 class="card-heading">Memories & Moments</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&auto=format&fit=crop" alt="Gallery 1"></div>
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&auto=format&fit=crop" alt="Gallery 2"></div>
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&auto=format&fit=crop" alt="Gallery 3"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FULL WIDTH REVEAL SECTION -->
+    <div class="glass-card" style="text-align: center;">
+      <h2 class="card-heading" style="border: none; padding: 0;">A Special Message</h2>
+      <button class="gift-reveal-btn" onclick="revealSurprise()">UNVEIL YOUR GIFT</button>
+      <div class="reveal-content" id="surpriseBox">
+        👑 <strong>Your Exclusive Gift:</strong> A private celebration dinner has been reserved in your honor. Check your invitation details for date and venue coordinates!
       </div>
     </div>
 
-    <!-- Avatar Header -->
-    <div class="avatar-wrapper">
-      <img id="profileImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop" alt="Profile" />
-    </div>
-
-    <!-- Personalized Greetings -->
-    <h1 class="recipient-name" id="displayTitle">Happy Birthday!</h1>
-    <p class="custom-wish" id="displayWish">
-      Wishing you a magical day filled with laughter, love, and incredible moments.
-    </p>
-
-    <!-- Interactive Cake & Candle -->
-    <div class="cake-zone" onclick="blowOutCandle()">
-      <svg width="110" height="110" viewBox="0 0 100 100">
-        <!-- Base Layer -->
-        <rect x="20" y="65" width="60" height="25" rx="5" fill="#d4af37" />
-        <rect x="30" y="45" width="40" height="20" rx="3" fill="#ffeaa7" />
-        <!-- Candle -->
-        <rect x="47" y="28" width="6" height="17" rx="2" fill="#ffd700" />
-        <!-- Flame -->
-        <path id="candleFlame" class="flame-light" d="M 50 16 Q 44 23 50 28 Q 56 23 50 16 Z" fill="#fffa65" />
-      </svg>
-      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: -6px;" id="cakeStatus">Tap to blow out candle 🕯️</p>
-    </div>
-
-    <!-- Photo Collage -->
-    <div class="photo-grid">
-      <div class="photo-item"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=300&auto=format&fit=crop" alt="Memory 1" /></div>
-      <div class="photo-item"><img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=300&auto=format&fit=crop" alt="Memory 2" /></div>
-      <div class="photo-item"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=300&auto=format&fit=crop" alt="Memory 3" /></div>
-    </div>
-
-    <!-- Interactive Reveal Button -->
-    <button class="cta-button" onclick="triggerCelebration()">Celebrate Now! 🎊</button>
-    
-    <div class="secret-box" id="secretNote">
-      ✨ <strong>Special Surprise:</strong> Make a wish and check your inbox for your gift card!
-    </div>
-
   </div>
 
-  <!-- Floating Audio Button & Audio Element -->
-  <button class="music-toggle-btn" id="musicBtn" onclick="toggleMusic()">
-    <span id="musicIcon">🎵</span>
-    <span id="musicText">Play Music</span>
-  </button>
+  <!-- FLOATING CONTROL DOCK -->
+  <div class="bottom-dock">
+    <button class="dock-btn" id="musicBtn" onclick="toggleAudio()">
+      <span id="musicIcon">🎵</span>
+      <span id="musicText">MUSIC</span>
+    </button>
+    <span style="color: rgba(212,175,55,0.4);">|</span>
+    <button class="dock-btn" onclick="triggerGrandConfetti()">
+      <span>✨</span>
+      <span>CELEBRATE</span>
+    </button>
+  </div>
 
-  <audio id="bgSong" loop preload="auto">
+  <audio id="bgMusic" loop preload="auto">
     <source src="song.mp3" type="audio/mpeg" />
   </audio>
 
   <script>
-    // 1. URL Query Parameter Handler (?name=Sarah&wish=Your+Custom+Wish)
-    function parseURLParams() {
-      const params = new URLSearchParams(window.location.search);
-      const name = params.get('name');
-      const wish = params.get('wish');
+    // URL Parameter support (?name=Alexander&wish=Your+custom+wish)
+    const urlParams = new URLSearchParams(window.location.search);
+    const nameParam = urlParams.get('name');
+    const wishParam = urlParams.get('wish');
 
-      if (name) {
-        document.getElementById('displayTitle').innerText = `Happy Birthday, ${name}!`;
-      }
-      if (wish) {
-        document.getElementById('displayWish').innerText = wish;
-      }
+    if (nameParam) document.getElementById('displayTitle').innerText = `Happy Birthday, ${nameParam}`;
+    if (wishParam) document.getElementById('displayWish').innerText = wishParam;
+
+    // Gate Opener
+    function openGate() {
+      document.getElementById('gate').classList.add('open');
+      toggleAudio();
+      triggerGrandConfetti();
     }
-    parseURLParams();
 
-    // 2. Audio Control Functions
-    function toggleMusic() {
-      const song = document.getElementById('bgSong');
-      const btn = document.getElementById('musicBtn');
+    // Audio Control
+    function toggleAudio() {
+      const audio = document.getElementById('bgMusic');
       const icon = document.getElementById('musicIcon');
       const text = document.getElementById('musicText');
 
-      if (song.paused) {
-        song.volume = 0.5;
-        song.play().then(() => {
-          btn.classList.add('playing');
+      if (audio.paused) {
+        audio.volume = 0.5;
+        audio.play().then(() => {
           icon.innerText = '⏸️';
-          text.innerText = 'Pause Music';
-        }).catch(err => console.log('Audio playback prevented:', err));
+          text.innerText = 'PAUSE';
+        }).catch(e => console.log('Audio error:', e));
       } else {
-        song.pause();
-        btn.classList.remove('playing');
+        audio.pause();
         icon.innerText = '🎵';
-        text.innerText = 'Play Music';
+        text.innerText = 'MUSIC';
       }
     }
 
-    function fadeOutMusic(duration = 1500) {
-      const song = document.getElementById('bgSong');
-      const btn = document.getElementById('musicBtn');
-      
-      if (!song || song.paused) return;
+    // Candle Extinguish
+    function extinguishFlame() {
+      const flame = document.getElementById('flameShape');
+      const status = document.getElementById('wishStatus');
 
-      const startVolume = song.volume;
-      const intervalTime = 50;
-      const step = startVolume / (duration / intervalTime);
-
-      const fadeInterval = setInterval(() => {
-        if (song.volume > step) {
-          song.volume -= step;
-        } else {
-          song.volume = 0;
-          song.pause();
-          clearInterval(fadeInterval);
-          song.volume = startVolume;
-
-          if (btn) {
-            btn.classList.remove('playing');
-            document.getElementById('musicIcon').innerText = '🎵';
-            document.getElementById('musicText').innerText = 'Play Music';
-          }
-        }
-      }, intervalTime);
-    }
-
-    // 3. Experience Initializer
-    function startExperience() {
-      document.getElementById('overlay').classList.add('dismissed');
-      
-      const song = document.getElementById('bgSong');
-      song.volume = 0.5;
-      song.play().then(() => {
-        const btn = document.getElementById('musicBtn');
-        btn.classList.add('playing');
-        document.getElementById('musicIcon').innerText = '⏸️';
-        document.getElementById('musicText').innerText = 'Pause Music';
-      }).catch(err => console.log('Autoplay prevented:', err));
-
-      launchConfetti();
-    }
-
-    // 4. Theme Switching
-    function setTheme(theme) {
-      document.body.className = '';
-      if (theme !== 'gold') {
-        document.body.classList.add(`theme-${theme}`);
-      }
-    }
-
-    // 5. Candle Blowing Handler
-    function blowOutCandle() {
-      const flame = document.getElementById('candleFlame');
-      const status = document.getElementById('cakeStatus');
-      
       if (flame) flame.style.display = 'none';
-      if (status) status.innerText = "✨ Your Wish Is Sent! ✨";
-
-      fadeOutMusic(1500);
+      if (status) status.innerText = '✨ WISH GRANTED ✨';
 
       confetti({
-        particleCount: 50,
-        spread: 60,
-        colors: ['#ffd700', '#ffeaa7', '#ffffff', '#d4af37'],
+        particleCount: 60,
+        spread: 80,
+        colors: ['#ffd700', '#ffffff', '#d4af37'],
         origin: { y: 0.6 }
       });
     }
 
-    // 6. Celebration Triggers
-    function launchConfetti() {
+    // Grand Confetti
+    function triggerGrandConfetti() {
       confetti({
-        particleCount: 100,
-        spread: 70,
-        colors: ['#ffd700', '#ffeaa7', '#ffffff', '#d4af37', '#f39c12'],
-        origin: { y: 0.6 }
+        particleCount: 120,
+        spread: 100,
+        colors: ['#ffd700', '#fcf6ba', '#ffffff', '#aa771c'],
+        origin: { y: 0.5 }
       });
     }
 
-    function triggerCelebration() {
-      launchConfetti();
-      document.getElementById('secretNote').style.display = 'block';
+    // Reveal Surprise
+    function revealSurprise() {
+      document.getElementById('surpriseBox').style.display = 'block';
+      triggerGrandConfetti();
     }
 
-    // 7. Ambient Warm Gold Particle Animation
+    // Ambient Gold Dust Particles
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -511,29 +470,29 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 65; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 2.2 + 0.8,
-        dy: -Math.random() * 0.5 - 0.15,
-        a: Math.random() * 0.8 + 0.2
+        r: Math.random() * 2 + 0.5,
+        dy: -Math.random() * 0.4 - 0.1,
+        alpha: Math.random() * 0.7 + 0.2
       });
     }
 
-    function renderParticles() {
+    function drawParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
         p.y += p.dy;
         if (p.y < 0) p.y = canvas.height;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 215, 0, ${p.a})`;
+        ctx.fillStyle = `rgba(212, 175, 55, ${p.alpha})`;
         ctx.fill();
       });
-      requestAnimationFrame(renderParticles);
+      requestAnimationFrame(drawParticles);
     }
-    renderParticles();
+    drawParticles();
   </script>
 </body>
 </html>
