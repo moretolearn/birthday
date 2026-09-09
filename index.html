@@ -1,436 +1,875 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Happy Birthday My Love ❤️</title>
 
+
 <style>
-    * {
-        box-sizing: border-box;
+
+/* ==============================
+   GENERAL
+============================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffdde1,
+            #ee9ca7,
+            #d9a7c7
+        );
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    color: #333;
+}
+
+
+/* ==============================
+   MAIN CONTAINER
+============================== */
+
+.container {
+
+    width: 100%;
+
+    max-width: 750px;
+
+    margin: auto;
+
+    padding: 25px 15px;
+}
+
+
+/* ==============================
+   CARD
+============================== */
+
+.card {
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius: 30px;
+
+    padding: 45px 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.18);
+}
+
+
+/* ==============================
+   HEART
+============================== */
+
+.heart {
+
+    font-size: 65px;
+
+    animation:
+        heartbeat 1.4s infinite;
+}
+
+
+@keyframes heartbeat {
+
+    0% {
+        transform: scale(1);
     }
 
-    body {
-        margin: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: linear-gradient(135deg, #ffdde1, #ee9ca7, #d9a7c7);
-        min-height: 100vh;
-        overflow-x: hidden;
-        color: #333;
+    25% {
+        transform: scale(1.15);
     }
 
-    .container {
-        width: 100%;
-        max-width: 750px;
-        margin: auto;
-        padding: 25px 15px;
+    40% {
+        transform: scale(1);
     }
 
-    .card {
-        background: rgba(255,255,255,0.95);
-        border-radius: 30px;
-        padding: 45px 30px;
-        text-align: center;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    60% {
+        transform: scale(1.15);
     }
 
-    .heart {
-        font-size: 65px;
-        animation: heartbeat 1.4s infinite;
+    100% {
+        transform: scale(1);
     }
+}
 
-    @keyframes heartbeat {
-        0% { transform: scale(1); }
-        25% { transform: scale(1.15); }
-        40% { transform: scale(1); }
-        60% { transform: scale(1.15); }
-        100% { transform: scale(1); }
-    }
 
-    h1 {
-        font-size: 48px;
-        margin: 15px 0 5px;
+/* ==============================
+   TITLE
+============================== */
 
-        background: linear-gradient(
+h1 {
+
+    font-size: 48px;
+
+    margin:
+        15px 0 5px;
+
+    background:
+        linear-gradient(
             90deg,
             #e91e63,
             #9c27b0,
             #e91e63
         );
 
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+    -webkit-background-clip: text;
 
-    .wife-name {
-        font-size: 30px;
-        font-weight: bold;
-        color: #e91e63;
-        margin-bottom: 25px;
-    }
+    -webkit-text-fill-color: transparent;
+}
 
-    .intro {
-        font-size: 18px;
-        line-height: 1.8;
-        color: #666;
-    }
 
-    .quote {
-        margin: 30px auto;
-        padding: 25px;
-        max-width: 600px;
+/* ==============================
+   WIFE NAME
+============================== */
 
-        background: linear-gradient(
+.wife-name {
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #e91e63;
+
+    margin-bottom: 25px;
+}
+
+
+/* ==============================
+   INTRO
+============================== */
+
+.intro {
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    color: #666;
+}
+
+
+/* ==============================
+   QUOTE
+============================== */
+
+.quote {
+
+    margin: 30px auto;
+
+    padding: 25px;
+
+    max-width: 600px;
+
+    background:
+        linear-gradient(
             135deg,
             #fff5f8,
             #faf0ff
         );
 
-        border-radius: 22px;
+    border-radius: 22px;
 
-        font-size: 21px;
-        font-style: italic;
-        line-height: 1.7;
+    font-size: 21px;
 
-        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-    }
+    font-style: italic;
 
-    .button {
-        border: none;
-        cursor: pointer;
+    line-height: 1.7;
 
-        padding: 17px 35px;
+    color: #555;
 
-        border-radius: 50px;
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.06);
+}
 
-        color: white;
 
-        font-size: 17px;
-        font-weight: bold;
+/* ==============================
+   BUTTON
+============================== */
 
-        background: linear-gradient(
+.button {
+
+    border: none;
+
+    cursor: pointer;
+
+    padding:
+        17px 35px;
+
+    border-radius: 50px;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    background:
+        linear-gradient(
             90deg,
             #e91e63,
             #9c27b0
         );
 
-        box-shadow: 0 10px 30px rgba(233,30,99,0.35);
+    box-shadow:
+        0 10px 30px
+        rgba(233,30,99,0.35);
 
-        transition: 0.3s;
+    transition:
+        0.3s;
+}
+
+
+.button:hover {
+
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+}
+
+
+/* ==============================
+   MUSIC BUTTON
+============================== */
+
+.music-control {
+
+    margin-top: 18px;
+
+    display: inline-block;
+
+    padding:
+        10px 20px;
+
+    border-radius: 30px;
+
+    background: #fff0f5;
+
+    color: #e91e63;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    border: 2px solid #f8bbd0;
+}
+
+
+/* ==============================
+   SURPRISE
+============================== */
+
+#surprise {
+
+    display: none;
+
+    margin-top: 40px;
+
+    animation:
+        reveal 1.5s ease;
+}
+
+
+@keyframes reveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(40px);
     }
 
-    .button:hover {
-        transform: translateY(-4px) scale(1.03);
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ==============================
+   LOVE TITLE
+============================== */
+
+.love-title {
+
+    font-size: 32px;
+
+    color: #e91e63;
+
+    margin-bottom: 20px;
+}
+
+
+/* ==============================
+   LOVE MESSAGE
+============================== */
+
+.love-message {
+
+    font-size: 19px;
+
+    line-height: 2;
+
+    color: #555;
+}
+
+
+/* ==============================
+   MAIN PHOTO
+============================== */
+
+.photo-box {
+
+    margin:
+        30px auto;
+
+    max-width: 500px;
+}
+
+
+.photo-box img {
+
+    width: 100%;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,0.2);
+
+    transition:
+        0.4s;
+}
+
+
+.photo-box img:hover {
+
+    transform:
+        scale(1.02);
+}
+
+
+/* ==============================
+   MEMORY PHOTOS
+============================== */
+
+.memories {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+
+.memories img {
+
+    width: 100%;
+
+    height: 130px;
+
+    object-fit: cover;
+
+    border-radius: 15px;
+
+    transition:
+        0.4s;
+}
+
+
+.memories img:hover {
+
+    transform:
+        scale(1.05);
+}
+
+
+/* ==============================
+   FOREVER
+============================== */
+
+.forever {
+
+    margin-top: 30px;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    color: #e91e63;
+}
+
+
+/* ==============================
+   SIGNATURE
+============================== */
+
+.signature {
+
+    margin-top: 25px;
+
+    font-size: 20px;
+
+    font-style: italic;
+
+    color: #777;
+}
+
+
+/* ==============================
+   FALLING HEARTS
+============================== */
+
+.falling-heart {
+
+    position: fixed;
+
+    top: -30px;
+
+    font-size: 25px;
+
+    animation:
+        fall linear forwards;
+
+    pointer-events: none;
+
+    z-index: 999;
+}
+
+
+@keyframes fall {
+
+    to {
+
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* ==============================
+   SPARKLES
+============================== */
+
+.sparkle {
+
+    position: fixed;
+
+    top: -20px;
+
+    pointer-events: none;
+
+    z-index: 998;
+
+    animation:
+        sparkleFall linear forwards;
+}
+
+
+@keyframes sparkleFall {
+
+    to {
+
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media(max-width:600px) {
+
+    .card {
+
+        padding:
+            35px 20px;
     }
 
-    /* Surprise section */
+    h1 {
 
-    #surprise {
-        display: none;
-        margin-top: 40px;
-
-        animation: reveal 1.5s ease;
+        font-size: 38px;
     }
 
-    @keyframes reveal {
-        from {
-            opacity: 0;
-            transform: translateY(40px);
-        }
+    .wife-name {
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        font-size: 25px;
     }
 
-    .love-title {
-        font-size: 32px;
-        color: #e91e63;
-        margin-bottom: 20px;
-    }
+    .quote {
 
-    .love-message {
-        font-size: 19px;
-        line-height: 2;
-        color: #555;
-    }
-
-    .photo-box {
-        margin: 30px auto;
-        max-width: 500px;
-    }
-
-    .photo-box img {
-        width: 100%;
-        border-radius: 25px;
-
-        box-shadow:
-            0 15px 40px rgba(0,0,0,0.2);
+        font-size: 18px;
     }
 
     .memories {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        margin-top: 25px;
+
+        grid-template-columns:
+            1fr;
     }
 
     .memories img {
-        width: 100%;
-        height: 130px;
-        object-fit: cover;
-        border-radius: 15px;
+
+        height: 220px;
     }
 
-    .forever {
-        margin-top: 30px;
+}
 
-        font-size: 25px;
-        font-weight: bold;
-
-        color: #e91e63;
-    }
-
-    .signature {
-        margin-top: 25px;
-
-        font-size: 20px;
-        font-style: italic;
-
-        color: #777;
-    }
-
-    /* Falling hearts */
-
-    .falling-heart {
-        position: fixed;
-        top: -30px;
-        font-size: 25px;
-        animation: fall linear forwards;
-        pointer-events: none;
-        z-index: 999;
-    }
-
-    @keyframes fall {
-        to {
-            transform:
-                translateY(110vh)
-                rotate(360deg);
-
-            opacity: 0;
-        }
-    }
-
-    @media(max-width:600px) {
-
-        .card {
-            padding: 35px 20px;
-        }
-
-        h1 {
-            font-size: 38px;
-        }
-
-        .wife-name {
-            font-size: 25px;
-        }
-
-        .quote {
-            font-size: 18px;
-        }
-
-        .memories {
-            grid-template-columns: 1fr;
-        }
-
-        .memories img {
-            height: 220px;
-        }
-    }
 </style>
 
 </head>
 
+
 <body>
+
+
+<!-- ==================================
+     BIRTHDAY SONG
+================================== -->
+
+<audio id="birthdaySong" loop>
+
+    <source
+        src="photos/birthday-song.mp3"
+        type="audio/mpeg">
+
+</audio>
+
 
 <div class="container">
 
+
 <div class="card">
 
-    <div class="heart">
-        ❤️
-    </div>
 
-    <h1>
-        Happy Birthday
-    </h1>
+<!-- ==================================
+     HEART
+================================== -->
 
-    <!-- CHANGE HER NAME HERE -->
-    <div class="wife-name">
-        My Beautiful Wife, Teja ❤️
-    </div>
+<div class="heart">
 
-    <p class="intro">
+    ❤️
 
-        Today is not just your birthday...
+</div>
 
-        <br>
 
-        It is the day the world was blessed
-        with the most beautiful person in my life.
+<!-- ==================================
+     TITLE
+================================== -->
 
-    </p>
+<h1>
 
+    Happy Birthday
 
-    <div class="quote">
+</h1>
 
-        “I don't need a perfect life.
-        I just need you beside me,
-        and every ordinary moment becomes extraordinary.”
 
-    </div>
+<div class="wife-name">
 
+    My Beautiful Wife, Teja ❤️
 
-    <p class="intro">
+</div>
 
-        You are not only my wife.
 
-        <br><br>
+<!-- ==================================
+     INTRO
+================================== -->
 
-        You are my best friend,
-        my happiness,
-        my strength,
-        my peace,
-        and my home.
+<p class="intro">
 
-    </p>
+    Today is not just your birthday...
 
+    <br><br>
 
-    <!-- SURPRISE BUTTON -->
+    It is the day the world was blessed
+    with the most beautiful person in my life.
 
-    <button
-        class="button"
-        onclick="showSurprise()">
+</p>
 
-        🎁 Click For Your Surprise ❤️
 
-    </button>
+<!-- ==================================
+     QUOTE
+================================== -->
 
+<div class="quote">
 
-    <!-- HIDDEN SURPRISE -->
+    “I don't need a perfect life.
+    I just need you beside me,
+    and every ordinary moment
+    becomes extraordinary.”
 
-    <div id="surprise">
+</div>
 
-        <div class="love-title">
 
-            💖 My Birthday Wish For You 💖
+<!-- ==================================
+     MESSAGE
+================================== -->
 
-        </div>
+<p class="intro">
 
+    You are not only my wife.
 
-        <div class="quote">
+    <br><br>
 
-            “If I had to choose again,
-            in every lifetime and in every world,
-            I would still choose you.”
+    You are my best friend,
+    my happiness,
+    my strength,
+    my peace,
+    and my home.
 
-        </div>
+</p>
 
 
-        <p class="love-message">
+<!-- ==================================
+     SURPRISE BUTTON
+================================== -->
 
-            My Love,
+<button
+    class="button"
+    onclick="showSurprise()">
 
-            <br><br>
+    🎁 Click For Your Surprise ❤️
 
-            I want you to know how special you are to me.
+</button>
 
-            <br><br>
 
-            Every smile of yours makes my world brighter.
-            Every moment with you becomes a memory
-            I want to keep forever.
+<br>
 
-            <br><br>
 
-            Life may not always be perfect,
-            but having you beside me makes
-            every journey worth taking.
+<!-- ==================================
+     MUSIC CONTROL
+================================== -->
 
-            <br><br>
+<button
+    class="music-control"
+    onclick="toggleMusic()">
 
-            I promise to keep choosing you,
-            supporting you,
-            laughing with you,
-            and loving you...
+    🎵 Play / Pause Music
 
-            <br><br>
+</button>
 
-            <strong>
-                Today, tomorrow, and for the rest of my life. ❤️
-            </strong>
 
-        </p>
+<!-- ==================================
+     HIDDEN SURPRISE
+================================== -->
 
+<div id="surprise">
 
-        <!-- MAIN PHOTO -->
 
-        <div class="photo-box">
+<div class="love-title">
 
-            <!--
-            CHANGE THIS IMAGE URL
-            TO YOUR WIFE'S PHOTO
-            -->
+    💖 My Birthday Wish For You 💖
 
-            <img
-                src="photos/mywife.JPG"
-                alt="My Beautiful Wife">
+</div>
 
-        </div>
 
+<div class="quote">
 
-        <!-- MEMORY PHOTOS -->
+    “If I had to choose again,
+    in every lifetime and in every world,
+    I would still choose you.”
 
-        <div class="memories">
+</div>
 
-            <img src="photos/photo1.JPG" alt="Memory 1">
 
-            <img src="photos/photo2.JPG" alt="Memory 2">
+<!-- ==================================
+     LOVE LETTER
+================================== -->
 
-            <img src="photos/photo3.JPG" alt="Memory 3">
+<p class="love-message">
 
-        </div>
+    My Love,
 
+    <br><br>
 
-        <div class="quote">
+    I want you to know how special
+    you are to me.
 
-            “You are my today,
-            my tomorrow,
-            and my forever.”
+    <br><br>
 
-        </div>
+    Every smile of yours makes
+    my world brighter.
 
+    Every moment with you becomes
+    a memory I want to keep forever.
 
-        <div class="forever">
+    <br><br>
 
-            ❤️ I LOVE YOU FOREVER ❤️
+    Life may not always be perfect,
+    but having you beside me makes
+    every journey worth taking.
 
-        </div>
+    <br><br>
 
+    You have brought so much love,
+    happiness and meaning into my life.
 
-        <div class="signature">
+    <br><br>
 
-            Forever Yours,
+    I promise to keep choosing you,
+    supporting you,
+    laughing with you,
+    standing beside you,
+    and loving you.
 
-            <br>
+    <br><br>
 
-            Ram ❤️
+    <strong>
 
-        </div>
+        Today, tomorrow,
+        and for the rest of my life. ❤️
 
-    </div>
+    </strong>
+
+</p>
+
+
+<!-- ==================================
+     MAIN PHOTO
+================================== -->
+
+<div class="photo-box">
+
+    <img
+        src="photos/mywife.JPG"
+        alt="My Beautiful Wife">
+
+</div>
+
+
+<!-- ==================================
+     MEMORIES
+================================== -->
+
+<div class="memories">
+
+    <img
+        src="photos/photo1.JPG"
+        alt="Our Memory 1">
+
+    <img
+        src="photos/photo2.JPG"
+        alt="Our Memory 2">
+
+    <img
+        src="photos/photo3.JPG"
+        alt="Our Memory 3">
+
+</div>
+
+
+<!-- ==================================
+     SECOND QUOTE
+================================== -->
+
+<div class="quote">
+
+    “You are my today,
+    my tomorrow,
+    and my forever.”
+
+</div>
+
+
+<!-- ==================================
+     FINAL MESSAGE
+================================== -->
+
+<p class="love-message">
+
+    No matter how many birthdays
+    come and go...
+
+    <br><br>
+
+    I will always be grateful
+    that life brought you to me.
+
+    <br><br>
+
+    You are my favorite person,
+    my greatest blessing,
+    and my forever love.
+
+</p>
+
+
+<!-- ==================================
+     FINAL LOVE
+================================== -->
+
+<div class="forever">
+
+    ❤️ I LOVE YOU FOREVER ❤️
+
+</div>
+
+
+<div class="signature">
+
+    Forever Yours,
+
+    <br><br>
+
+    <strong>
+
+        Ram ❤️
+
+    </strong>
+
+</div>
+
+
+</div>
+
 
 </div>
 
@@ -439,73 +878,307 @@
 
 <script>
 
-function showSurprise() {
 
-    const surprise =
-        document.getElementById("surprise");
+/* ==================================
+   MUSIC
+================================== */
 
-    surprise.style.display = "block";
-
-
-    // Scroll to surprise
-
-    setTimeout(() => {
-
-        surprise.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }, 100);
+const song =
+    document.getElementById("birthdaySong");
 
 
-    // Create falling hearts
+/*
+   Set volume
+*/
 
-    for (let i = 0; i < 40; i++) {
+song.volume = 0.7;
 
-        createHeart();
+
+/*
+   Try to play automatically
+   when page opens.
+*/
+
+window.addEventListener(
+    "load",
+    function() {
+
+        song.play().catch(
+            function() {
+
+                console.log(
+                    "Autoplay blocked."
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/*
+   If browser blocks autoplay,
+   start music on first interaction.
+*/
+
+document.addEventListener(
+    "click",
+    function startMusic() {
+
+        song.play().catch(
+            function() {}
+        );
+
+        document.removeEventListener(
+            "click",
+            startMusic
+        );
+
+    },
+    { once: true }
+);
+
+
+/* ==================================
+   PLAY / PAUSE
+================================== */
+
+function toggleMusic() {
+
+    if (song.paused) {
+
+        song.play();
+
+    } else {
+
+        song.pause();
 
     }
 
 }
 
 
+/* ==================================
+   SHOW SURPRISE
+================================== */
+
+function showSurprise() {
+
+
+    /*
+       Start music
+    */
+
+    song.play().catch(
+        function() {}
+    );
+
+
+    /*
+       Show surprise
+    */
+
+    const surprise =
+        document.getElementById(
+            "surprise"
+        );
+
+
+    surprise.style.display =
+        "block";
+
+
+    /*
+       Scroll to surprise
+    */
+
+    setTimeout(
+        function() {
+
+            surprise.scrollIntoView({
+
+                behavior: "smooth"
+
+            });
+
+        },
+        100
+    );
+
+
+    /*
+       Falling hearts
+    */
+
+    for (
+        let i = 0;
+        i < 50;
+        i++
+    ) {
+
+        createHeart();
+
+    }
+
+
+    /*
+       Sparkles
+    */
+
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        createSparkle();
+
+    }
+
+}
+
+
+/* ==================================
+   CREATE HEART
+================================== */
+
 function createHeart() {
 
+
     const heart =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     heart.className =
         "falling-heart";
 
-    heart.innerHTML =
-        ["❤️","💖","💕","💗","💓","💘"]
-        [Math.floor(Math.random() * 6)];
 
+    const hearts = [
+
+        "❤️",
+        "💖",
+        "💕",
+        "💗",
+        "💓",
+        "💘",
+        "💝"
+
+    ];
+
+
+    heart.innerHTML =
+        hearts[
+            Math.floor(
+                Math.random()
+                * hearts.length
+            )
+        ];
+
+
+    /*
+       Random horizontal position
+    */
 
     heart.style.left =
-        Math.random() * 100 + "vw";
+        Math.random() * 100
+        + "vw";
 
+
+    /*
+       Random animation speed
+    */
 
     heart.style.animationDuration =
-        (3 + Math.random() * 5) + "s";
+        (3 + Math.random() * 5)
+        + "s";
 
+
+    /*
+       Random size
+    */
 
     heart.style.fontSize =
-        (15 + Math.random() * 25) + "px";
+        (15 + Math.random() * 25)
+        + "px";
 
 
-    document.body.appendChild(heart);
+    document.body.appendChild(
+        heart
+    );
 
 
-    setTimeout(() => {
+    setTimeout(
+        function() {
 
-        heart.remove();
+            heart.remove();
 
-    }, 8000);
+        },
+        8000
+    );
 
 }
 
+
+/* ==================================
+   CREATE SPARKLE
+================================== */
+
+function createSparkle() {
+
+
+    const sparkle =
+        document.createElement(
+            "div"
+        );
+
+
+    sparkle.className =
+        "sparkle";
+
+
+    sparkle.innerHTML =
+        "✨";
+
+
+    sparkle.style.left =
+        Math.random() * 100
+        + "vw";
+
+
+    sparkle.style.animationDuration =
+        (3 + Math.random() * 4)
+        + "s";
+
+
+    sparkle.style.fontSize =
+        (12 + Math.random() * 20)
+        + "px";
+
+
+    document.body.appendChild(
+        sparkle
+    );
+
+
+    setTimeout(
+        function() {
+
+            sparkle.remove();
+
+        },
+        7000
+    );
+
+}
+
+
 </script>
 
+
 </body>
+
 </html>
+```
