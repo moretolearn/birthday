@@ -4,153 +4,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday 🎂</title>
+
+<title>Happy Birthday, My Love ❤️</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: linear-gradient(135deg, #fff1eb, #fce4ec, #e8eaf6);
-        color: #333;
-    }
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec, #f5e6ff);
+    color: #333;
+}
 
-    .container {
-        max-width: 700px;
-        margin: 40px auto;
-        padding: 20px;
-    }
+.container {
+    max-width: 720px;
+    margin: 35px auto;
+    padding: 15px;
+}
 
+.card {
+    background: rgba(255,255,255,0.96);
+    border-radius: 30px;
+    padding: 50px 35px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.heart {
+    font-size: 65px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+h1 {
+    font-size: 46px;
+    margin: 15px 0 5px;
+    background: linear-gradient(90deg, #e91e63, #9c27b0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.name {
+    font-size: 30px;
+    font-weight: 700;
+    color: #e91e63;
+    margin-bottom: 25px;
+}
+
+.intro {
+    max-width: 580px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #666;
+}
+
+.quote {
+    margin: 35px auto;
+    padding: 28px;
+    max-width: 580px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #fff5f8, #faf3ff);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    font-size: 21px;
+    font-style: italic;
+    line-height: 1.7;
+    color: #555;
+}
+
+.message {
+    font-size: 18px;
+    line-height: 1.9;
+    color: #555;
+    margin: 30px auto;
+    max-width: 580px;
+}
+
+.highlight {
+    color: #e91e63;
+    font-weight: 700;
+}
+
+.wishes {
+    margin: 30px auto;
+    max-width: 550px;
+    text-align: left;
+    background: #fff8fa;
+    border-radius: 20px;
+    padding: 25px 30px;
+}
+
+.wishes p {
+    margin: 14px 0;
+    font-size: 17px;
+}
+
+.surprise {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 16px 35px;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #e91e63, #9c27b0);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 17px;
+    box-shadow: 0 10px 30px rgba(233,30,99,0.3);
+}
+
+.footer {
+    margin-top: 35px;
+    color: #999;
+    font-size: 15px;
+}
+
+.signature {
+    margin-top: 25px;
+    font-size: 23px;
+    color: #e91e63;
+    font-weight: 700;
+}
+
+@media(max-width:600px) {
     .card {
-        background: rgba(255,255,255,0.95);
-        border-radius: 28px;
-        padding: 50px 40px;
-        text-align: center;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-        overflow: hidden;
-        position: relative;
-    }
-
-    .top {
-        font-size: 60px;
-        margin-bottom: 10px;
+        padding: 40px 20px;
     }
 
     h1 {
-        font-size: 48px;
-        margin: 10px 0;
-        font-weight: 800;
-        background: linear-gradient(90deg, #ff4081, #7c4dff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-size: 38px;
     }
 
     .name {
-        font-size: 30px;
-        font-weight: 700;
-        color: #444;
-        margin-bottom: 25px;
-    }
-
-    .message {
-        font-size: 18px;
-        line-height: 1.8;
-        color: #666;
-        margin: 20px auto;
-        max-width: 560px;
+        font-size: 25px;
     }
 
     .quote {
-        margin: 35px auto;
-        padding: 25px;
-        max-width: 560px;
-        border-radius: 18px;
-        background: linear-gradient(135deg, #fff8fb, #f5f3ff);
-        border-left: 5px solid #ff4081;
-        font-size: 21px;
-        font-style: italic;
-        font-weight: 600;
-        line-height: 1.6;
-        color: #444;
+        font-size: 18px;
     }
-
-    .quote-author {
-        display: block;
-        margin-top: 12px;
-        font-size: 14px;
-        font-style: normal;
-        color: #888;
-    }
-
-    .wish-box {
-        margin: 30px auto;
-        padding: 25px;
-        border-radius: 20px;
-        background: #fafafa;
-    }
-
-    .wish-box p {
-        margin: 10px 0;
-        font-size: 16px;
-        color: #555;
-    }
-
-    .highlight {
-        color: #ff4081;
-        font-weight: 700;
-    }
-
-    .button {
-        display: inline-block;
-        margin-top: 25px;
-        padding: 15px 32px;
-        border-radius: 50px;
-        text-decoration: none;
-        color: white;
-        font-weight: 700;
-        font-size: 16px;
-        background: linear-gradient(90deg, #ff4081, #7c4dff);
-        box-shadow: 0 8px 25px rgba(124,77,255,0.25);
-    }
-
-    .footer {
-        margin-top: 35px;
-        font-size: 14px;
-        color: #999;
-    }
-
-    .stars {
-        font-size: 22px;
-        letter-spacing: 8px;
-        margin: 20px 0;
-    }
-
-    @media(max-width:600px) {
-        .container {
-            margin: 10px auto;
-            padding: 10px;
-        }
-
-        .card {
-            padding: 35px 20px;
-        }
-
-        h1 {
-            font-size: 38px;
-        }
-
-        .name {
-            font-size: 25px;
-        }
-
-        .quote {
-            font-size: 18px;
-        }
-    }
+}
 </style>
 </head>
 
@@ -158,73 +156,89 @@
 
 <div class="container">
 
-    <div class="card">
+<div class="card">
 
-        <div class="top">🎂✨</div>
+    <div class="heart">❤️</div>
 
-        <div class="stars">✦ ✧ ✦ ✧ ✦</div>
+    <h1>Happy Birthday</h1>
 
-        <h1>Happy Birthday!</h1>
+    <div class="name">
+        My Beautiful Wife
+    </div>
 
-        <div class="name">
-            Dear <span class="highlight">[NAME]</span> ❤️
-        </div>
+    <p class="intro">
+        Today I celebrate not only the day you were born,
+        but also the day the world became more beautiful
+        because you came into it.
+    </p>
 
-        <p class="message">
-            Today isn't just another day on the calendar.
-            It's a celebration of the wonderful person you are
-            and the beautiful journey that lies ahead of you.
-        </p>
+    <div class="quote">
+        “I don’t need a perfect life.
+        I just need you beside me,
+        and every ordinary moment becomes extraordinary.”
+    </div>
 
-        <div class="quote">
-            “The future belongs to those who believe in the
-            beauty of their dreams.”
-            <span class="quote-author">— Eleanor Roosevelt</span>
-        </div>
+    <p class="message">
+        My love, you are more than my wife.
+        You are my <span class="highlight">best friend</span>,
+        my greatest comfort, my happiness,
+        and the person who makes my life complete.
+    </p>
 
-        <div class="wish-box">
+    <div class="quote">
+        “If I had to choose again,
+        in every lifetime and in every world,
+        I would still choose you.”
+    </div>
 
-            <p>🌟 May your dreams become reality.</p>
+    <div class="wishes">
 
-            <p>❤️ May your heart always be surrounded by love.</p>
+        <p>❤️ May your smile never fade.</p>
 
-            <p>🌈 May every challenge make you stronger.</p>
+        <p>✨ May all your dreams find their way to you.</p>
 
-            <p>✨ May every new chapter bring something beautiful.</p>
+        <p>🌹 May every year make you happier than the last.</p>
 
-            <p>😊 May your life always have reasons to smile.</p>
+        <p>🌟 May life give you everything your beautiful heart deserves.</p>
 
-        </div>
-
-        <div class="quote">
-            “Count your life by smiles, not tears.
-            Count your age by friends, not years.”
-        </div>
-
-        <p class="message">
-            Another year of your life has been written.
-            May the next chapter be your <span class="highlight">
-            most beautiful one yet.</span>
-        </p>
-
-        <div class="quote">
-            “And suddenly you know:
-            It's time to start something new
-            and trust the magic of beginnings.”
-        </div>
-
-        <a href="[YOUR_LINK]" class="button">
-            🎁 A Special Surprise
-        </a>
-
-        <div class="footer">
-            Made with ❤️ especially for you
-            <br><br>
-            Wishing you happiness today, tomorrow,
-            and always. ✨
-        </div>
+        <p>💖 And may I always be there to hold your hand through it all.</p>
 
     </div>
+
+    <div class="quote">
+        “You are my today,
+        my tomorrow,
+        and my forever.”
+    </div>
+
+    <p class="message">
+        Thank you for filling my life with love,
+        laughter, memories, and countless beautiful moments.
+        I may not always find the perfect words,
+        but please know that
+        <span class="highlight">I love you more than words can say.</span>
+    </p>
+
+    <div class="quote">
+        “Home isn't a place.
+        Home is wherever I am with you.”
+    </div>
+
+    <a href="[YOUR_SURPRISE_LINK]" class="surprise">
+        🎁 Click for Your Surprise ❤️
+    </a>
+
+    <div class="signature">
+        Forever Yours ❤️
+    </div>
+
+    <div class="footer">
+        Happy Birthday, my love.
+        <br>
+        Here's to another beautiful year together. 🥂
+    </div>
+
+</div>
 
 </div>
 
